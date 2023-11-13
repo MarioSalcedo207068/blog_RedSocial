@@ -264,4 +264,108 @@ public class Usuario {
         return credencial;
     }
 
+    /**
+     * Establece las credenciales del usuario.
+     *
+     * @param credencial Las credenciales del usuario.
+     */
+//    public void setCredencial(Credencial credencial) {
+//        this.credencial = credencial;
+//    }
+//
+//    public String getCorreo() {
+//        return this.credencial.getCorreo();
+//    }
+//    /**
+//     * Establece el correo de las credenciales.
+//     *
+//     * @param correo El correo de las credenciales.
+//     */
+//    public void setCorreo(String correo) {
+//        this.credencial.setCorreo(correo);
+//    }
+//
+//    /**
+//     * Obtiene la contraseña de las credenciales.
+//     *
+//     * @return La contraseña de las credenciales.
+//     */
+//    public String getContrasenia() {
+//        return this.credencial.getContrasenia();
+//    }
+//
+//    /**
+//     * Establece la contraseña de las credenciales.
+//     *
+//     * @param contrasenia La contraseña de las credenciales.
+//     */
+//    public void setContrasenia(String contrasenia) {
+//        this.credencial.setContrasenia(contrasenia);
+//    }
+    /**
+     * Obtiene el municipio del usuario.
+     *
+     * @return El municipio del usuario.
+     */
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    /**
+     * Establece el municipio del usuario.
+     *
+     * @param municipio El municipio del usuario.
+     */
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
+    /**
+     * Obtiene las publicaciones comunes del usuario.
+     *
+     * @return Las publicaciones comunes del usuario.
+     */
+    public List<Comun> getPublicacionesComunes() {
+        return publicacionesComunes;
+    }
+
+    /**
+     * Establece las publicaciones comunes del usuario.
+     *
+     * @param publicacionesComunes Las publicaciones comunes del usuario.
+     */
+    public void setPublicacionesComunes(List<Comun> publicacionesComunes) {
+        this.publicacionesComunes = publicacionesComunes;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombres=" + nombres + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", telefono=" + telefono + ", avatar=" + avatar + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", genero=" + genero + ", credencial=" + credencial + ", municipio=" + municipio + ", publicacionesComunes=" + publicacionesComunes + '}';
+    }
+
 }
