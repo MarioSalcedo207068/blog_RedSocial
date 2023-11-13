@@ -53,5 +53,24 @@ public class Comun extends Publicacion {
         this.usuario = usuario;
     }
 
-    
+    /**
+     * Constructor que recibe el usuario asociado, el ID, la fecha y hora de
+     * creación, el título, el contenido y la fecha y hora de edición de la
+     * publicación común.
+     *
+     * @param usuario El usuario asociado a la publicación común.
+     * @param id El ID de la publicación común.
+     * @param fechaHoraCreacion La fecha y hora de creación de la publicación
+     * común.
+     * @param titulo El título de la publicación común.
+     * @param contenido El contenido de la publicación común.
+     * @param fechaHoraEdicion La fecha y hora de edición de la publicación
+     * común.
+     */
+    public Comun(Usuario usuario, ObjectId id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+        super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
+        this.usuario = usuario;
+    }
+
+
 }
