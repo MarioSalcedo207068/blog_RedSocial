@@ -67,7 +67,7 @@ public class Comun extends Publicacion {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * común.
      */
-    public Comun(Usuario usuario, ObjectId id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Comun(Usuario usuario, int id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
         super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
         this.usuario = usuario;
     }
