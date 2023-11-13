@@ -93,4 +93,175 @@ public class Usuario {
         this.municipio = municipio;
     }
 
+    /**
+     * Obtiene el ID del usuario.
+     *
+     * @return El ID del usuario.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Establece el ID del usuario.
+     *
+     * @param id El ID del usuario.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Obtiene los nombres del usuario.
+     *
+     * @return Los nombres del usuario.
+     */
+    public String getNombres() {
+        return nombres;
+    }
+
+    /**
+     * Establece los nombres del usuario.
+     *
+     * @param nombres Los nombres del usuario.
+     */
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    /**
+     * Obtiene el apellido paterno del usuario.
+     *
+     * @return El apellido paterno del usuario.
+     */
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    /**
+     * Establece el apellido paterno del usuario.
+     *
+     * @param apellidoPaterno El apellido paterno del usuario.
+     */
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    /**
+     * Obtiene el apellido materno del usuario.
+     *
+     * @return El apellido materno del usuario.
+     */
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    /**
+     * Establece el apellido materno del usuario.
+     *
+     * @param apellidoMaterno El apellido materno del usuario.
+     */
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    /**
+     * Obtiene el número de teléfono del usuario.
+     *
+     * @return El número de teléfono del usuario.
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * Establece el número de teléfono del usuario.
+     *
+     * @param telefono El número de teléfono del usuario.
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    /**
+     * Obtiene la URL del avatar del usuario.
+     *
+     * @return La URL del avatar del usuario.
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * Establece la URL del avatar del usuario.
+     *
+     * @param avatar La URL del avatar del usuario.
+     */
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    /**
+     * Obtiene la ciudad del usuario.
+     *
+     * @return La ciudad del usuario.
+     */
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    /**
+     * Establece la ciudad del usuario.
+     *
+     * @param ciudad La ciudad del usuario.
+     */
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    /**
+     * Obtiene la fecha de nacimiento del usuario.
+     *
+     * @return La fecha de nacimiento del usuario.
+     */
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * Establece la fecha de nacimiento del usuario.
+     *
+     * @param fechaNacimiento La fecha de nacimiento del usuario.
+     */
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * Obtiene el género del usuario.
+     *
+     * @return El género del usuario.
+     */
+    public Genero getGenero() {
+        return genero;
+    }
+
+    /**
+     * Establece el género del usuario.
+     *
+     * @param genero El género del usuario.
+     */
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    /**
+     * Obtiene las credenciales del usuario.
+     *
+     * @return Las credenciales del usuario.
+     */
+    public Credencial getCredencial() {
+        return credencial;
+    }
+
 }
