@@ -72,5 +72,46 @@ public class Comun extends Publicacion {
         this.usuario = usuario;
     }
 
+    /**
+     * Obtiene el usuario asociado a la publicación común.
+     *
+     * @return El usuario asociado a la publicación común.
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * Establece el usuario asociado a la publicación común.
+     *
+     * @param usuario El usuario asociado a la publicación común.
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * Obtiene la lista de comentarios asociados a la publicación común.
+     *
+     * @return La lista de comentarios asociados a la publicación común.
+     */
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    /**
+     * Establece la lista de comentarios asociados a la publicación común.
+     *
+     * @param comentarios La lista de comentarios asociados a la publicación
+     * común.
+     */
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    @Override
+    public String toString() {
+        return "Comun{" + "usuario=" + usuario + ", comentarios=" + comentarios + '}';
+    }
 
 }
