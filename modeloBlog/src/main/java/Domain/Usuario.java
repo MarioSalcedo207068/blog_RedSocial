@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Domain;
 
 import java.util.Date;
@@ -269,39 +265,10 @@ public class Usuario {
      *
      * @param credencial Las credenciales del usuario.
      */
-//    public void setCredencial(Credencial credencial) {
-//        this.credencial = credencial;
-//    }
-//
-//    public String getCorreo() {
-//        return this.credencial.getCorreo();
-//    }
-//    /**
-//     * Establece el correo de las credenciales.
-//     *
-//     * @param correo El correo de las credenciales.
-//     */
-//    public void setCorreo(String correo) {
-//        this.credencial.setCorreo(correo);
-//    }
-//
-//    /**
-//     * Obtiene la contraseña de las credenciales.
-//     *
-//     * @return La contraseña de las credenciales.
-//     */
-//    public String getContrasenia() {
-//        return this.credencial.getContrasenia();
-//    }
-//
-//    /**
-//     * Establece la contraseña de las credenciales.
-//     *
-//     * @param contrasenia La contraseña de las credenciales.
-//     */
-//    public void setContrasenia(String contrasenia) {
-//        this.credencial.setContrasenia(contrasenia);
-//    }
+    public void setCredencial(Credencial credencial) {
+        this.credencial = credencial;
+    }
+
     /**
      * Obtiene el municipio del usuario.
      *
