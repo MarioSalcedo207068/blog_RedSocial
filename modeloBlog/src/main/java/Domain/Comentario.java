@@ -7,15 +7,28 @@ package Domain;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  * Clase que representa un comentario en el sistema.
  */
+@Entity
+@Table(name = "comentario")
 public class Comentario {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "fechaHora", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
+
+    @Column(name = "contenido", nullable = false, length = 300)
     private String contenido;
+
+    //Relaciones
     private Normal usuarioNormal;
     private Comun publicacionComun;
     private List<Comentario> comentarios;

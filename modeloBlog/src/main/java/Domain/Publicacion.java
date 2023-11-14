@@ -4,19 +4,37 @@
  */
 package Domain;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  * Clase que representa una publicación.
  */
+@Entity
+@Table(name = "publicacion")
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Publicacion {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date fechaHoraCreacion;
+
+    @Column(name = "fechaCreacion", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar fechaHoraCreacion;
+
+    @Column(name = "titulo", nullable = false, length = 200)
     private String titulo;
+
+    @Column(name = "contenido", nullable = false, length = 1000)
     private String contenido;
-    private Date fechaHoraEdicion;
+
+    @Column(name = "fechaEdicion", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar fechaHoraEdicion;
 
     /**
      * Constructor por defecto de la clase Publicacion.
@@ -24,7 +42,7 @@ public class Publicacion {
     public Publicacion() {
     }
 
-    public Publicacion(Date fechaHoraCreacion, String titulo, String contenido) {
+    public Publicacion(Calendar fechaHoraCreacion, String titulo, String contenido) {
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -38,7 +56,8 @@ public class Publicacion {
      * @param contenido El contenido de la publicación.
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación.
      */
-    public Publicacion(Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Publicacion(Calendar fechaHoraCreacion, String titulo, String contenido,
+            Calendar fechaHoraEdicion) {
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -54,7 +73,8 @@ public class Publicacion {
      * @param contenido El contenido de la publicación.
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación.
      */
-    public Publicacion(Long id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Publicacion(Long id, Calendar fechaHoraCreacion, String titulo,
+            String contenido, Calendar fechaHoraEdicion) {
         this.id = id;
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.titulo = titulo;
@@ -85,7 +105,7 @@ public class Publicacion {
      *
      * @return La fecha y hora de creación de la publicación.
      */
-    public Date getFechaHoraCreacion() {
+    public Calendar getFechaHoraCreacion() {
         return fechaHoraCreacion;
     }
 
@@ -94,7 +114,7 @@ public class Publicacion {
      *
      * @param fechaHoraCreacion La fecha y hora de creación de la publicación.
      */
-    public void setFechaHoraCreacion(Date fechaHoraCreacion) {
+    public void setFechaHoraCreacion(Calendar fechaHoraCreacion) {
         this.fechaHoraCreacion = fechaHoraCreacion;
     }
 
@@ -139,7 +159,7 @@ public class Publicacion {
      *
      * @return La fecha y hora de edición de la publicación.
      */
-    public Date getFechaHoraEdicion() {
+    public Calendar getFechaHoraEdicion() {
         return fechaHoraEdicion;
     }
 
@@ -148,7 +168,7 @@ public class Publicacion {
      *
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación.
      */
-    public void setFechaHoraEdicion(Date fechaHoraEdicion) {
+    public void setFechaHoraEdicion(Calendar fechaHoraEdicion) {
         this.fechaHoraEdicion = fechaHoraEdicion;
     }
 

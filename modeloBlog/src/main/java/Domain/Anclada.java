@@ -4,14 +4,19 @@
  */
 package Domain;
 
-import java.util.Date;
+import java.util.Calendar;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 /**
  * Clase que representa una publicación anclada en el sistema. Hereda de la
  * clase Publicacion.
  */
+@Entity
+@DiscriminatorValue(value = "anclada")
 public class Anclada extends Publicacion {
 
+    //Relaciones
     private Administrador admin;
 
     /**
@@ -20,7 +25,8 @@ public class Anclada extends Publicacion {
     public Anclada() {
     }
 
-    public Anclada(Administrador admin, Date fechaHoraCreacion, String titulo, String contenido) {
+    public Anclada(Administrador admin, Calendar fechaHoraCreacion, String titulo,
+            String contenido) {
         super(fechaHoraCreacion, titulo, contenido);
         this.admin = admin;
     }
@@ -47,7 +53,8 @@ public class Anclada extends Publicacion {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * anclada.
      */
-    public Anclada(Administrador admin, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Anclada(Administrador admin, Calendar fechaHoraCreacion, String titulo,
+            String contenido, Calendar fechaHoraEdicion) {
         super(fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
         this.admin = admin;
     }
@@ -66,7 +73,8 @@ public class Anclada extends Publicacion {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * anclada.
      */
-    public Anclada(Administrador administrador, Long id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Anclada(Administrador administrador, Long id, Calendar fechaHoraCreacion,
+            String titulo, String contenido, Calendar fechaHoraEdicion) {
         super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
         this.admin = administrador;
     }

@@ -4,14 +4,18 @@
  */
 package Domain;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  * Clase que representa una publicación común en el sistema.
  */
+@Entity
+@DiscriminatorValue(value = "comun")
 public class Comun extends Publicacion {
 
+    //Relaciones
     private Usuario usuario;
     private List<Comentario> comentarios;
 
@@ -30,7 +34,8 @@ public class Comun extends Publicacion {
         this.usuario = usuario;
     }
 
-    public Comun(Usuario usuario, Date fechaHoraCreacion, String titulo, String contenido) {
+    public Comun(Usuario usuario, Calendar fechaHoraCreacion, String titulo,
+            String contenido) {
         super(fechaHoraCreacion, titulo, contenido);
         this.usuario = usuario;
     }
@@ -48,7 +53,8 @@ public class Comun extends Publicacion {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * común.
      */
-    public Comun(Usuario usuario, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Comun(Usuario usuario, Calendar fechaHoraCreacion, String titulo,
+            String contenido, Calendar fechaHoraEdicion) {
         super(fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
         this.usuario = usuario;
     }
@@ -67,7 +73,8 @@ public class Comun extends Publicacion {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * común.
      */
-    public Comun(Usuario usuario, Long id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Comun(Usuario usuario, Long id, Calendar fechaHoraCreacion, String titulo,
+            String contenido, Calendar fechaHoraEdicion) {
         super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
         this.usuario = usuario;
     }
