@@ -43,18 +43,32 @@ public class Pruebas {
                 new Municipio("cajeme", new Estado("Sonora")));
 
         usuario = facade.useNormalDAO().create(usuario);
-        //Registrar Usuario publicacion
-        Comun publicacion = new Comun(usuario, Calendar.getInstance(),
+
+        Normal UsuNormal = usuario;
+        //Validar inicio de sesion
+        List<Usuario> usuarios = facade.useUsuarioDAO().findUsuarioEntities();
+        String correo = "daoma@hotmail.com";
+        String contrasenia = "1234";
+
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getCredencial().getCorreo().equals(correo)
+                    && usuarios.get(i).getCredencial().getContrasenia().equals(contrasenia)) {
+
+                System.out.println("Bienvenido " + usuarios.get(i).getNombres());
+            }
+        }
+        //Registrar publicacion
+        Comun publicacion = new Comun(UsuNormal, Calendar.getInstance(),
                 "El mundo", "Que bonito esta");
 
         publicacion = facade.useComunDAO().create(publicacion);
         //Registrar comentario
         Comentario comentario = new Comentario(Calendar.getInstance(),
-                "Interesante", usuario, publicacion);
+                "Interesante", UsuNormal, publicacion);
 
         //Registrar comentario anclado
         Comentario comentario1 = new Comentario(Calendar.getInstance(),
-                "Interesante 2", usuario, publicacion);
+                "Interesante 2", UsuNormal, publicacion);
         comentario1.setComentarioPadre(comentario);
 
         List<Comentario> comentarios = new ArrayList<>();
