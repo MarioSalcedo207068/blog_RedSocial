@@ -1,5 +1,6 @@
-package Domain;
+package dominio;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @DiscriminatorValue(value = "administrador")
-public class Administrador extends Usuario {
+public class Administrador extends Usuario implements Serializable {
 
     //Relaciones
     @OneToMany(mappedBy = "administrador")

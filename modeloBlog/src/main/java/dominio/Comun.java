@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Domain;
+package dominio;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @DiscriminatorValue(value = "comun")
-public class Comun extends Publicacion {
+public class Comun extends Publicacion implements Serializable {
 
     //Relaciones
     @ManyToOne

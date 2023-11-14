@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Domain;
+package dominio;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Objects;
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "publicacion")
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Publicacion {
+public class Publicacion implements Serializable {
 
     @Id
     @Column(name = "id")

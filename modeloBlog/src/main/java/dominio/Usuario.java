@@ -1,5 +1,6 @@
-package Domain;
+package dominio;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "usuario")
 @DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @Column(name = "id")

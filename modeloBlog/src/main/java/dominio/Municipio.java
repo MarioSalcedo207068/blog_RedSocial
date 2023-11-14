@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Domain;
+package dominio;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -17,7 +18,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "municipio")
-public class Municipio {
+public class Municipio implements Serializable {
 
     @Id
     @Column(name = "id")

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Domain;
+package dominio;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @DiscriminatorValue(value = "anclada")
-public class Anclada extends Publicacion {
+public class Anclada extends Publicacion implements Serializable {
 
     //Relaciones
     @ManyToOne
