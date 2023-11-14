@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author HP
  */
-public interface IEstadolDAO {
+public interface IEstadoDAO {
 
     public void create(Estado estado);
 

@@ -2,6 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="persistencia" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>dominio.Administrador</class>
+    <class>dominio.Anclada</class>
+    <class>dominio.Comentario</class>
+    <class>dominio.Comun</class>
+    <class>dominio.Credencial</class>
+    <class>dominio.Estado</class>
+    <class>dominio.Municipio</class>
+    <class>dominio.Normal</class>
+    <class>dominio.Publicacion</class>
+    <class>dominio.Usuario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/blog?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -13,17 +13,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import dominio.Municipio;
 import implementacionDAO.exceptions.NonexistentEntityException;
-import interfacesDAO.IEstadolDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import interfacesDAO.IEstadoDAO;
 
 /**
  *
  * @author HP
  */
-public class EstadoDAO implements Serializable, IEstadolDAO {
+public class EstadoDAO implements Serializable, IEstadoDAO {
 
     public EstadoDAO(EntityManagerFactory emf) {
         this.emf = emf;

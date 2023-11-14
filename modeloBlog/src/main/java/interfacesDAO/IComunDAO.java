@@ -6,6 +6,7 @@
 package interfacesDAO;
 
 import dominio.Comun;
+import implementacionDAO.exceptions.NonexistentEntityException;
 import java.util.List;
 
 /**
@@ -16,9 +17,9 @@ public interface IComunDAO {
 
     public void create(Comun comun);
 
-    public void edit(Comun comun);
+    public void edit(Comun comun) throws NonexistentEntityException, Exception;
 
-    public void destroy(Long id);
+    public void destroy(Long id) throws NonexistentEntityException;
 
     public Comun findComun(Long id);
 
