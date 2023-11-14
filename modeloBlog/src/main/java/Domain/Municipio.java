@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class Municipio {
 
-    private int id;
+    private Long id;
     private String nombre;
     private Estado estado;
     private List<Usuario> usuarios;
@@ -29,6 +29,7 @@ public class Municipio {
 
     /**
      * Constructor que recibe el nombre y el estado del municipio.
+     *
      * @param nombre El nombre del municipio.
      * @param estado El estado al que pertenece el municipio.
      */
@@ -38,7 +39,9 @@ public class Municipio {
     }
 
     /**
-     * Constructor que recibe el nombre, el estado y la lista de usuarios del municipio.
+     * Constructor que recibe el nombre, el estado y la lista de usuarios del
+     * municipio.
+     *
      * @param nombre El nombre del municipio.
      * @param estado El estado al que pertenece el municipio.
      * @param usuarios La lista de usuarios del municipio.
@@ -50,13 +53,15 @@ public class Municipio {
     }
 
     /**
-     * Constructor que recibe el ID, el nombre, el estado y la lista de usuarios del municipio.
+     * Constructor que recibe el ID, el nombre, el estado y la lista de usuarios
+     * del municipio.
+     *
      * @param id El ID del municipio.
      * @param nombre El nombre del municipio.
      * @param estado El estado al que pertenece el municipio.
      * @param usuarios La lista de usuarios del municipio.
      */
-    public Municipio(int id, String nombre, Estado estado, List<Usuario> usuarios) {
+    public Municipio(Long id, String nombre, Estado estado, List<Usuario> usuarios) {
         this.id = id;
         this.nombre = nombre;
         this.estado = estado;
@@ -65,22 +70,25 @@ public class Municipio {
 
     /**
      * Obtiene el ID del municipio.
+     *
      * @return El ID del municipio.
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * Establece el ID del municipio.
+     *
      * @param id El ID del municipio.
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
      * Obtiene el nombre del municipio.
+     *
      * @return El nombre del municipio.
      */
     public String getNombre() {
@@ -89,6 +97,7 @@ public class Municipio {
 
     /**
      * Establece el nombre del municipio.
+     *
      * @param nombre El nombre del municipio.
      */
     public void setNombre(String nombre) {
@@ -97,6 +106,7 @@ public class Municipio {
 
     /**
      * Obtiene el estado al que pertenece el municipio.
+     *
      * @return El estado al que pertenece el municipio.
      */
     public Estado getEstado() {
@@ -105,6 +115,7 @@ public class Municipio {
 
     /**
      * Establece el estado al que pertenece el municipio.
+     *
      * @param estado El estado al que pertenece el municipio.
      */
     public void setEstado(Estado estado) {
@@ -113,6 +124,7 @@ public class Municipio {
 
     /**
      * Obtiene la lista de usuarios del municipio.
+     *
      * @return La lista de usuarios del municipio.
      */
     public List<Usuario> getUsuarios() {
@@ -121,6 +133,7 @@ public class Municipio {
 
     /**
      * Establece la lista de usuarios del municipio.
+     *
      * @param usuarios La lista de usuarios del municipio.
      */
     public void setUsuarios(List<Usuario> usuarios) {

@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Publicacion {
 
-    private int id;
+    private Long id;
     private Date fechaHoraCreacion;
     private String titulo;
     private String contenido;
@@ -54,7 +54,7 @@ public class Publicacion {
      * @param contenido El contenido de la publicación.
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación.
      */
-    public Publicacion(int id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Publicacion(Long id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
         this.id = id;
         this.fechaHoraCreacion = fechaHoraCreacion;
         this.titulo = titulo;
@@ -67,7 +67,7 @@ public class Publicacion {
      *
      * @return El ID de la publicación.
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -76,7 +76,7 @@ public class Publicacion {
      *
      * @param id El ID de la publicación.
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

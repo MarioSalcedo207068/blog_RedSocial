@@ -66,7 +66,7 @@ public class Anclada extends Publicacion {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * anclada.
      */
-    public Anclada(Administrador administrador, int id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
+    public Anclada(Administrador administrador, Long id, Date fechaHoraCreacion, String titulo, String contenido, Date fechaHoraEdicion) {
         super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
         this.admin = administrador;
     }

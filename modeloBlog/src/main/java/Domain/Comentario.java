@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class Comentario {
 
-    private int id;
+    private Long id;
     private Date fechaHora;
     private String contenido;
     private Normal usuarioNormal;
@@ -54,7 +54,7 @@ public class Comentario {
      * @param publicacionComun La publicación común asociada al comentario.
      * @param comentarios La lista de comentarios asociados al comentario.
      */
-    public Comentario(int id, Date fechaHora, String contenido, Normal usuarioNormal, Comun publicacionComun, List<Comentario> comentarios) {
+    public Comentario(Long id, Date fechaHora, String contenido, Normal usuarioNormal, Comun publicacionComun, List<Comentario> comentarios) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.contenido = contenido;
@@ -68,7 +68,7 @@ public class Comentario {
      *
      * @return El ID del comentario.
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -77,7 +77,7 @@ public class Comentario {
      *
      * @param id El ID del comentario.
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

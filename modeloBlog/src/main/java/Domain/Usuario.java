@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class Usuario {
 
-    private int id;
+    private Long id;
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -75,7 +75,7 @@ public class Usuario {
      * @param credencial Las credenciales del usuario.
      * @param municipio El municipio del usuario.
      */
-    public Usuario(int id, String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String avatar, String ciudad, Date fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
+    public Usuario(Long id, String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String avatar, String ciudad, Date fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
         this.id = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -94,7 +94,7 @@ public class Usuario {
      *
      * @return El ID del usuario.
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -103,7 +103,7 @@ public class Usuario {
      *
      * @param id El ID del usuario.
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
