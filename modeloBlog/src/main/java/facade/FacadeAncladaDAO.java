@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.IAncladaDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeAncladaDAO {
-    
+
+    IAncladaDAO ancladaDAO;
+
+    public FacadeAncladaDAO(IAncladaDAO ancladaDAO) {
+        this.ancladaDAO = ancladaDAO;
+    }
+
 }

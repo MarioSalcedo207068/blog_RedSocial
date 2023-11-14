@@ -5,10 +5,20 @@
  */
 package facade;
 
+import interfacesDAO.IAdministradorDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeAdministradorDAO {
+
+    IAdministradorDAO administradorDAO;
+
+    public FacadeAdministradorDAO(IAdministradorDAO administradorDAO) {
+        this.administradorDAO = administradorDAO;
+    }
     
+    
+
 }

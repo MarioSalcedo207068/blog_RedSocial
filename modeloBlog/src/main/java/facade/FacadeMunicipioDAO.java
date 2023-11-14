@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.IMunicipioDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeMunicipioDAO {
-    
+
+    IMunicipioDAO municipioDAO;
+
+    public FacadeMunicipioDAO(IMunicipioDAO municipioDAO) {
+        this.municipioDAO = municipioDAO;
+    }
+
 }

@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.IComentarioDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeComentarioDAO {
-    
+
+    IComentarioDAO comentarioDAO;
+
+    public FacadeComentarioDAO(IComentarioDAO comentarioDAO) {
+        this.comentarioDAO = comentarioDAO;
+    }
+
 }

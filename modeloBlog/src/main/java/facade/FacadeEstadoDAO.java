@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.IEstadoDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeEstadoDAO {
-    
+
+    IEstadoDAO estadoDAO;
+
+    public FacadeEstadoDAO(IEstadoDAO estadoDAO) {
+        this.estadoDAO = estadoDAO;
+    }
+
 }

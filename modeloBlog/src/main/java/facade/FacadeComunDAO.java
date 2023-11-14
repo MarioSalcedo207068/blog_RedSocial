@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.IComunDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeComunDAO {
-    
+
+    IComunDAO comunDAO;
+
+    public FacadeComunDAO(IComunDAO comunDAO) {
+        this.comunDAO = comunDAO;
+    }
+
 }

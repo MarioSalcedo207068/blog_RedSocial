@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.IUsuarioDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeUsuarioDAO {
-    
+
+    IUsuarioDAO usuarioDAO;
+
+    public FacadeUsuarioDAO(IUsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
+
 }

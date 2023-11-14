@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.INormalDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeNormalDAO {
-    
+
+    INormalDAO normalDAO;
+
+    public FacadeNormalDAO(INormalDAO normalDAO) {
+        this.normalDAO = normalDAO;
+    }
+
 }

@@ -9,7 +9,7 @@ package facade;
  *
  * @author HP
  */
-public interface IFacadeDAO {
+public interface IFacade {
 
     public FacadeAdministradorDAO useAdministradorDAO();
 

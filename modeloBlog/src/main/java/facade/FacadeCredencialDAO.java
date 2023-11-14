@@ -5,10 +5,18 @@
  */
 package facade;
 
+import interfacesDAO.ICredencialDAO;
+
 /**
  *
  * @author HP
  */
 public class FacadeCredencialDAO {
-    
+
+    ICredencialDAO credencialDAO;
+
+    public FacadeCredencialDAO(ICredencialDAO credencialDAO) {
+        this.credencialDAO = credencialDAO;
+    }
+
 }
