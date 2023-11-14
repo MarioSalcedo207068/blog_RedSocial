@@ -5,16 +5,10 @@
  */
 package factory;
 
-import interfacesDAO.IAdministradorDAO;
-import interfacesDAO.IAncladaDAO;
-import interfacesDAO.IComentarioDAO;
-import interfacesDAO.IComunDAO;
-import interfacesDAO.ICredencialDAO;
-import interfacesDAO.IEstadoDAO;
-import interfacesDAO.IMunicipioDAO;
-import interfacesDAO.INormalDAO;
-import interfacesDAO.IPublicacionDAO;
-import interfacesDAO.IUsuarioDAO;
+import conexion.ConexionMYSQL;
+import conexion.IConexionBD;
+import implementacionDAO.*;
+import interfacesDAO.*;
 
 /**
  *
@@ -22,54 +16,60 @@ import interfacesDAO.IUsuarioDAO;
  */
 public class FactoryDAO implements IFactoryDAO {
 
+    IConexionBD conexionBD;
+
+    public FactoryDAO() {
+        this.conexionBD = new ConexionMYSQL();
+    }
+
     @Override
     public IAdministradorDAO crearAdministradorDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new AdministradorDAO(conexionBD.usarBD());
     }
 
     @Override
     public IAncladaDAO crearAncladaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new AncladaDAO(conexionBD.usarBD());
     }
 
     @Override
     public IComentarioDAO crearComentarioDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ComentarioDAO(conexionBD.usarBD());
     }
 
     @Override
     public IComunDAO crearComunDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ComunDAO(conexionBD.usarBD());
     }
 
     @Override
     public ICredencialDAO crearCredencialDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new CredencialDAO(conexionBD.usarBD());
     }
 
     @Override
     public IEstadoDAO crearEstadoDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new EstadoDAO(conexionBD.usarBD());
     }
 
     @Override
     public IMunicipioDAO crearMunicipioDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new MunicipioDAO(conexionBD.usarBD());
     }
 
     @Override
     public INormalDAO crearNormalDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new NormalDAO(conexionBD.usarBD());
     }
 
     @Override
     public IPublicacionDAO crearPublicacionDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new PublicacionDAO(conexionBD.usarBD());
     }
 
     @Override
     public IUsuarioDAO crearUsuarioDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new UsuarioDAO(conexionBD.usarBD());
     }
 
 }
