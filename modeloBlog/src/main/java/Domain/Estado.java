@@ -26,6 +26,7 @@ public class Estado {
     private String nombre;
 
     //Relaciones
+    @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL)
     private List<Municipio> municipos;
 
     /**

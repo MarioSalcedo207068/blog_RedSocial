@@ -16,7 +16,11 @@ import javax.persistence.*;
 public class Comun extends Publicacion {
 
     //Relaciones
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "comun")
     private List<Comentario> comentarios;
 
     /**

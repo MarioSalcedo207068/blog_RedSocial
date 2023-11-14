@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class Administrador extends Usuario {
 
     //Relaciones
+    @OneToMany(mappedBy = "administrador")
     private List<Anclada> publicacionesAncladas;
 
     public Administrador() {

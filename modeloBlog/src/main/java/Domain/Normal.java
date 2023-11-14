@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class Normal extends Usuario {
 
     //Relaciones
+    @OneToMany(mappedBy = "normal")
     private List<Comentario> comenatarios;
 
     public Normal() {

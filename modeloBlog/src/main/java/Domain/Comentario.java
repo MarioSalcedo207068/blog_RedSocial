@@ -29,8 +29,22 @@ public class Comentario {
     private String contenido;
 
     //Relaciones
+    //Relación con usuario normal
+    @ManyToOne
+    @JoinColumn(name = "usuarioNormal_id")
     private Normal usuarioNormal;
+
+    //Relación con publicación comun
+    @ManyToOne
+    @JoinColumn(name = "publicacionComun_id")
     private Comun publicacionComun;
+
+    //Relación con publicación comentarios
+    @ManyToOne
+    @JoinColumn(name = "comentarioPadre_id")
+    private Comentario comentarioPadre;
+
+    @OneToMany(mappedBy = "comentarioPadre", cascade = CascadeType.REMOVE)
     private List<Comentario> comentarios;
 
     /**
@@ -182,6 +196,14 @@ public class Comentario {
      */
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public Comentario getComentarioPadre() {
+        return comentarioPadre;
+    }
+
+    public void setComentarioPadre(Comentario comentarioPadre) {
+        this.comentarioPadre = comentarioPadre;
     }
 
     @Override

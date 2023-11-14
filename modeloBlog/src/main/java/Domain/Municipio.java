@@ -28,7 +28,11 @@ public class Municipio {
     private String nombre;
 
     //Relaciones
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
     private Estado estado;
+
+    @OneToMany(mappedBy = "municipio")
     private List<Usuario> usuarios;
 
     /**

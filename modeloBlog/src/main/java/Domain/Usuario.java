@@ -46,8 +46,18 @@ public class Usuario {
     private Genero genero;
 
     //Relaciones
+    //Relación con credencial
+    @OneToOne
+    @JoinColumn(name = "credencial_id", unique = true)
     private Credencial credencial;
+
+    //Relación con municipio
+    @ManyToOne
+    @JoinColumn(name = "municipio_id")
     private Municipio municipio;
+
+    //Relación con usuario
+    @OneToMany(mappedBy = "usuario")
     private List<Comun> publicacionesComunes;
 
     /**

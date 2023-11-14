@@ -7,6 +7,8 @@ package Domain;
 import java.util.Calendar;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Clase que representa una publicación anclada en el sistema. Hereda de la
@@ -17,6 +19,8 @@ import javax.persistence.Entity;
 public class Anclada extends Publicacion {
 
     //Relaciones
+    @ManyToOne
+    @JoinColumn(name = "administrador_id")
     private Administrador admin;
 
     /**
