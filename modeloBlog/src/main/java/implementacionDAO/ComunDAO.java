@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import dominio.Usuario;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.IComunDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author HP
  */
-public class ComunDAO implements Serializable {
+public class ComunDAO implements Serializable, IComunDAO {
 
     public ComunDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -164,5 +165,5 @@ public class ComunDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -7,6 +7,7 @@ package implementacionDAO;
 
 import dominio.Publicacion;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.IPublicacionDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,7 +21,7 @@ import javax.persistence.criteria.Root;
  *
  * @author HP
  */
-public class PublicacionDAO implements Serializable {
+public class PublicacionDAO implements Serializable, IPublicacionDAO {
 
     public PublicacionDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -134,5 +135,5 @@ public class PublicacionDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

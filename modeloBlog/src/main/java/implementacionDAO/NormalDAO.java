@@ -14,6 +14,7 @@ import dominio.Municipio;
 import dominio.Comun;
 import dominio.Normal;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.INormalDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author HP
  */
-public class NormalDAO implements Serializable {
+public class NormalDAO implements Serializable, INormalDAO {
 
     public NormalDAO(EntityManagerFactory emf) {
         this.emf = emf;

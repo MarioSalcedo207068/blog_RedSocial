@@ -6,6 +6,7 @@
 package interfacesDAO;
 
 import dominio.Administrador;
+import implementacionDAO.exceptions.NonexistentEntityException;
 import java.util.List;
 
 /**
@@ -16,12 +17,12 @@ public interface IAdministradorDAO {
 
     public void create(Administrador administrador);
 
-    public void edit(Administrador administrador);
+    public void edit(Administrador administrador) throws NonexistentEntityException, Exception;
 
-    public void destroy(Long id);
-
-    public List<Administrador> findAdministradorEntities();
+    public void destroy(Long id) throws NonexistentEntityException;
 
     public Administrador findAdministrador(Long id);
+
+    public List<Administrador> findAdministradorEntities();
 
 }

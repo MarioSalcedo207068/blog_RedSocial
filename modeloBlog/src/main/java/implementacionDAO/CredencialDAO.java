@@ -7,6 +7,7 @@ package implementacionDAO;
 
 import dominio.Credencial;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.ICredencialDAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,7 +21,7 @@ import javax.persistence.criteria.Root;
  *
  * @author HP
  */
-public class CredencialDAO implements Serializable {
+public class CredencialDAO implements Serializable, ICredencialDAO {
 
     public CredencialDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -134,5 +135,5 @@ public class CredencialDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

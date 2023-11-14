@@ -14,6 +14,7 @@ import dominio.Normal;
 import dominio.Comun;
 import dominio.Comentario;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.IComentarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author HP
  */
-public class ComentarioDAO implements Serializable {
+public class ComentarioDAO implements Serializable, IComentarioDAO {
 
     public ComentarioDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -271,5 +272,5 @@ public class ComentarioDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -5,10 +5,23 @@
  */
 package interfacesDAO;
 
+import dominio.Usuario;
+import implementacionDAO.exceptions.NonexistentEntityException;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface IUsuarioDAO {
-    
+
+    public void create(Usuario usuario);
+
+    public void edit(Usuario usuario) throws NonexistentEntityException, Exception;
+
+    public void destroy(Long id) throws NonexistentEntityException;
+
+    public Usuario findUsuario(Long id);
+
+    public List<Usuario> findUsuarioEntities();
 }

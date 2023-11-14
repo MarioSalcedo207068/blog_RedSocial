@@ -6,6 +6,7 @@
 package interfacesDAO;
 
 import dominio.Anclada;
+import implementacionDAO.exceptions.NonexistentEntityException;
 import java.util.List;
 
 /**
@@ -16,9 +17,9 @@ public interface IAncladaDAO {
 
     public void create(Anclada anclada);
 
-    public void edit(Anclada anclada);
+    public void edit(Anclada anclada) throws NonexistentEntityException, Exception;
 
-    public void destroy(Long id);
+    public void destroy(Long id) throws NonexistentEntityException;
 
     public Anclada findAnclada(Long id);
 

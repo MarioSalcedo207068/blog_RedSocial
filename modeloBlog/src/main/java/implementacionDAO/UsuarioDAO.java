@@ -14,6 +14,7 @@ import dominio.Municipio;
 import dominio.Comun;
 import dominio.Usuario;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.IUsuarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author HP
  */
-public class UsuarioDAO implements Serializable {
+public class UsuarioDAO implements Serializable, IUsuarioDAO {
 
     public UsuarioDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -215,5 +216,5 @@ public class UsuarioDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

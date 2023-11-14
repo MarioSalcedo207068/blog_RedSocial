@@ -5,10 +5,23 @@
  */
 package interfacesDAO;
 
+import dominio.Normal;
+import implementacionDAO.exceptions.NonexistentEntityException;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface INormalDAO {
-    
+
+    public void create(Normal normal);
+
+    public void edit(Normal normal) throws NonexistentEntityException, Exception;
+
+    public void destroy(Long id) throws NonexistentEntityException;
+
+    public Normal findNormal(Long id);
+
+    public List<Normal> findNormalEntities();
 }

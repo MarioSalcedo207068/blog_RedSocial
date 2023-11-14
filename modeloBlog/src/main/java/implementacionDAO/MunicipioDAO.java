@@ -14,6 +14,7 @@ import dominio.Estado;
 import dominio.Municipio;
 import dominio.Usuario;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.IMunicipioDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author HP
  */
-public class MunicipioDAO implements Serializable {
+public class MunicipioDAO implements Serializable, IMunicipioDAO {
 
     public MunicipioDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -215,5 +216,5 @@ public class MunicipioDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

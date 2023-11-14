@@ -5,10 +5,23 @@
  */
 package interfacesDAO;
 
+import dominio.Credencial;
+import implementacionDAO.exceptions.NonexistentEntityException;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface ICredencialDAO {
-    
+
+    public void create(Credencial credencial);
+
+    public void edit(Credencial credencial) throws NonexistentEntityException, Exception;
+
+    public void destroy(Long id) throws NonexistentEntityException;
+
+    public Credencial findCredencial(Long id);
+
+    public List<Credencial> findCredencialEntities();
 }

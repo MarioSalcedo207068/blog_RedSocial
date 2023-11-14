@@ -5,10 +5,22 @@
  */
 package interfacesDAO;
 
+import dominio.Comun;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface IComunDAO {
-    
+
+    public void create(Comun comun);
+
+    public void edit(Comun comun);
+
+    public void destroy(Long id);
+
+    public Comun findComun(Long id);
+
+    public List<Comun> findComunEntities();
 }

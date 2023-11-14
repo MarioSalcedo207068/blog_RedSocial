@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 import dominio.Administrador;
 import dominio.Anclada;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.IAncladaDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author HP
  */
-public class AncladaDAO implements Serializable {
+public class AncladaDAO implements Serializable, IAncladaDAO {
 
     public AncladaDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -164,5 +165,5 @@ public class AncladaDAO implements Serializable {
             em.close();
         }
     }
-    
+
 }

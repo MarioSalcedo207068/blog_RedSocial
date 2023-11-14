@@ -10,7 +10,6 @@ import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import dominio.Municipio;
 import dominio.Comun;
 import implementacionDAO.exceptions.NonexistentEntityException;
@@ -18,12 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import interfacesDAO.IAdministradorDAO;
 
 /**
  *
  * @author HP
  */
-public class AdministradorDAO implements Serializable {
+public class AdministradorDAO implements Serializable, IAdministradorDAO {
 
     public AdministradorDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -75,6 +75,13 @@ public class AdministradorDAO implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param administrador
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
+    @Override
     public void edit(Administrador administrador) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {

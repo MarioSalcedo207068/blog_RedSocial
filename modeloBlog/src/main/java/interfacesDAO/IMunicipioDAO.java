@@ -5,10 +5,23 @@
  */
 package interfacesDAO;
 
+import dominio.Municipio;
+import implementacionDAO.exceptions.NonexistentEntityException;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface IMunicipioDAO {
-    
+
+    public void create(Municipio municipio);
+
+    public void edit(Municipio municipio) throws NonexistentEntityException, Exception;
+
+    public void destroy(Long id) throws NonexistentEntityException;
+
+    public Municipio findMunicipio(Long id);
+
+    public List<Municipio> findMunicipioEntities();
 }
