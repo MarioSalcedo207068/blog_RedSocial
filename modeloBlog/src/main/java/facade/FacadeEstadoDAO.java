@@ -5,7 +5,12 @@
  */
 package facade;
 
+import dominio.Estado;
+import implementacionDAO.exceptions.NonexistentEntityException;
 import interfacesDAO.IEstadoDAO;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +22,34 @@ public class FacadeEstadoDAO {
 
     public FacadeEstadoDAO(IEstadoDAO estadoDAO) {
         this.estadoDAO = estadoDAO;
+    }
+
+    public void create(Estado estado) {
+        estadoDAO.create(estado);
+    }
+
+    public void edit(Estado estado) {
+        try {
+            estadoDAO.edit(estado);
+        } catch (Exception ex) {
+            Logger.getLogger(FacadeEstadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void destroy(Long id) {
+        try {
+            estadoDAO.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(FacadeEstadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Estado findEstado(Long id) {
+        return estadoDAO.findEstado(id);
+    }
+
+    public List<Estado> findEstadoEntities() {
+        return estadoDAO.findEstadoEntities();
     }
 
 }
