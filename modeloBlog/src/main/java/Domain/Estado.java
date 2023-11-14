@@ -4,16 +4,28 @@
  */
 package Domain;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  *
  * @author aleja
  */
+@Entity
+@Table(name = "estado")
 public class Estado {
 
+    //Atributos
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", nullable = false, length = 150)
     private String nombre;
+
+    //Relaciones
     private List<Municipio> municipos;
 
     /**

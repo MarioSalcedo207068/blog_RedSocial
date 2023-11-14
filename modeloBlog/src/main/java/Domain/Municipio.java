@@ -6,6 +6,7 @@ package Domain;
 
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  *
@@ -14,10 +15,19 @@ import java.util.Objects;
 /**
  * Clase que representa un municipio en un estado.
  */
+@Entity
+@Table(name = "municipio")
 public class Municipio {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", nullable = false, length = 200)
     private String nombre;
+
+    //Relaciones
     private Estado estado;
     private List<Usuario> usuarios;
 

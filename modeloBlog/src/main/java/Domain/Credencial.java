@@ -4,13 +4,25 @@
  */
 package Domain;
 
+import javax.persistence.*;
+
 /**
  *
  * @author aleja
  */
+@Entity
+@Table(name = "credencial")
 public class Credencial {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "correo", nullable = false, length = 200, unique = true)
     private String correo;
+
+    @Column(name = "contrasenia", nullable = false, length = 200)
     private String contrasenia;
 
     /**
@@ -26,6 +38,19 @@ public class Credencial {
      * @param contrasenia La contraseña de las credenciales.
      */
     public Credencial(String correo, String contrasenia) {
+        this.correo = correo;
+        this.contrasenia = contrasenia;
+    }
+
+    /**
+     * Constructor que recibe el correo y la contraseña de las credenciales.
+     *
+     * @param id El id de la credencial
+     * @param correo El correo de las credenciales.
+     * @param contrasenia La contraseña de las credenciales.
+     */
+    public Credencial(Long id, String correo, String contrasenia) {
+        this.id = id;
         this.correo = correo;
         this.contrasenia = contrasenia;
     }
@@ -64,6 +89,24 @@ public class Credencial {
      */
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    /**
+     * Obtiene el id de la credencial.
+     *
+     * @return El id de la credenciale.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Establece el id de la credencial.
+     *
+     * @param id El id de la credencial.
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

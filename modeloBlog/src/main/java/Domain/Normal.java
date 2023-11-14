@@ -4,25 +4,35 @@
  */
 package Domain;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  * Clase que representa a un usuario normal.
  */
+@Entity
+@DiscriminatorValue(value = "normal")
 public class Normal extends Usuario {
 
+    //Relaciones
     private List<Comentario> comenatarios;
 
     public Normal() {
     }
 
-    public Normal(String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String avatar, String ciudad, Date fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
-        super(nombres, apellidoPaterno, apellidoMaterno, telefono, avatar, ciudad, fechaNacimiento, genero, credencial, municipio);
+    public Normal(String nombres, String apellidoPaterno, String apellidoMaterno,
+            String telefono, String avatar, String ciudad, Calendar fechaNacimiento,
+            Genero genero, Credencial credencial, Municipio municipio) {
+        super(nombres, apellidoPaterno, apellidoMaterno, telefono, avatar, ciudad,
+                fechaNacimiento, genero, credencial, municipio);
     }
 
-    public Normal(Long id, String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String avatar, String ciudad, Date fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
-        super(id, nombres, apellidoPaterno, apellidoMaterno, telefono, avatar, ciudad, fechaNacimiento, genero, credencial, municipio);
+    public Normal(Long id, String nombres, String apellidoPaterno, String apellidoMaterno,
+            String telefono, String avatar, String ciudad, Calendar fechaNacimiento, Genero genero,
+            Credencial credencial, Municipio municipio) {
+        super(id, nombres, apellidoPaterno, apellidoMaterno, telefono, avatar, ciudad,
+                fechaNacimiento, genero, credencial, municipio);
     }
 
     /**

@@ -1,23 +1,51 @@
 package Domain;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.*;
 
 /**
  * Clase que representa un usuario.
  */
+@Entity
+@Table(name = "usuario")
+@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Usuario {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombres", nullable = false, length = 200)
     private String nombres;
+
+    @Column(name = "apellidoPaterno", nullable = false, length = 200)
     private String apellidoPaterno;
+
+    @Column(name = "apellidoMaterno", nullable = false, length = 200)
     private String apellidoMaterno;
+
+    @Column(name = "telefono", nullable = false, length = 12)
     private String telefono;
+
+    @Column(name = "avatar", nullable = false, length = 200, unique = true)
     private String avatar;
+
+    @Column(name = "ciudad", nullable = false, length = 200)
     private String ciudad;
-    private Date fechaNacimiento;
+
+    @Column(name = "fechaNacimiento", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Calendar fechaNacimiento;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "genero", nullable = false)
     private Genero genero;
+
+    //Relaciones
     private Credencial credencial;
     private Municipio municipio;
     private List<Comun> publicacionesComunes;
@@ -47,7 +75,9 @@ public class Usuario {
      * @param credencial Las credenciales del usuario.
      * @param municipio El municipio del usuario.
      */
-    public Usuario(String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String avatar, String ciudad, Date fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
+    public Usuario(String nombres, String apellidoPaterno, String apellidoMaterno,
+            String telefono, String avatar, String ciudad, Calendar fechaNacimiento,
+            Genero genero, Credencial credencial, Municipio municipio) {
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -75,7 +105,10 @@ public class Usuario {
      * @param credencial Las credenciales del usuario.
      * @param municipio El municipio del usuario.
      */
-    public Usuario(Long id, String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String avatar, String ciudad, Date fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
+    public Usuario(Long id, String nombres, String apellidoPaterno,
+            String apellidoMaterno, String telefono, String avatar,
+            String ciudad, Calendar fechaNacimiento, Genero genero,
+            Credencial credencial, Municipio municipio) {
         this.id = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -220,7 +253,7 @@ public class Usuario {
      *
      * @return La fecha de nacimiento del usuario.
      */
-    public Date getFechaNacimiento() {
+    public Calendar getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -229,7 +262,7 @@ public class Usuario {
      *
      * @param fechaNacimiento La fecha de nacimiento del usuario.
      */
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(Calendar fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
