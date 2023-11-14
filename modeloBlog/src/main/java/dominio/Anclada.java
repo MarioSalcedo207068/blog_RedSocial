@@ -6,6 +6,7 @@ package dominio;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,9 +21,9 @@ import javax.persistence.ManyToOne;
 public class Anclada extends Publicacion implements Serializable {
 
     //Relaciones
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "administrador_id")
-    private Administrador admin;
+    private Administrador administrador;
 
     /**
      * Constructor por defecto de la clase Anclada.
@@ -33,7 +34,7 @@ public class Anclada extends Publicacion implements Serializable {
     public Anclada(Administrador admin, Calendar fechaHoraCreacion, String titulo,
             String contenido) {
         super(fechaHoraCreacion, titulo, contenido);
-        this.admin = admin;
+        this.administrador = admin;
     }
 
     /**
@@ -42,7 +43,7 @@ public class Anclada extends Publicacion implements Serializable {
      * @param admin El administrador asociado a la publicación anclada.
      */
     public Anclada(Administrador admin) {
-        this.admin = admin;
+        this.administrador = admin;
     }
 
     /**
@@ -61,7 +62,7 @@ public class Anclada extends Publicacion implements Serializable {
     public Anclada(Administrador admin, Calendar fechaHoraCreacion, String titulo,
             String contenido, Calendar fechaHoraEdicion) {
         super(fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
-        this.admin = admin;
+        this.administrador = admin;
     }
 
     /**
@@ -81,7 +82,7 @@ public class Anclada extends Publicacion implements Serializable {
     public Anclada(Administrador administrador, Long id, Calendar fechaHoraCreacion,
             String titulo, String contenido, Calendar fechaHoraEdicion) {
         super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
-        this.admin = administrador;
+        this.administrador = administrador;
     }
 
     /**
@@ -90,7 +91,7 @@ public class Anclada extends Publicacion implements Serializable {
      * @return El administrador asociado a la publicación anclada.
      */
     public Administrador getAdmin() {
-        return admin;
+        return administrador;
     }
 
     /**
@@ -99,7 +100,7 @@ public class Anclada extends Publicacion implements Serializable {
      * @param admin El administrador asociado a la publicación anclada.
      */
     public void setAdmin(Administrador admin) {
-        this.admin = admin;
+        this.administrador = admin;
     }
 
 }

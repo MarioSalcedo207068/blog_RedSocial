@@ -5,6 +5,7 @@
  */
 package implementacionDAO;
 
+import dominio.Comun;
 import dominio.Publicacion;
 import implementacionDAO.exceptions.NonexistentEntityException;
 import interfacesDAO.IPublicacionDAO;
@@ -74,14 +75,16 @@ public class PublicacionDAO implements Serializable, IPublicacionDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Publicacion publicacion;
+            Comun comun;
             try {
-                publicacion = em.getReference(Publicacion.class, id);
-                publicacion.getId();
+                comun = em.find(Comun.class, id);
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The publicacion with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The comun with id " + id + " no longer exists.", enfe);
             }
-            em.remove(publicacion);
+            if (comun != null) {
+                em.remove(comun);
+            }
+            //comentario = em.merge(comentario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {

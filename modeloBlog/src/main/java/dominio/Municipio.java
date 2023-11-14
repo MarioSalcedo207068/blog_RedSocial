@@ -29,7 +29,7 @@ public class Municipio implements Serializable {
     private String nombre;
 
     //Relaciones
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "estado_id")
     private Estado estado;
 

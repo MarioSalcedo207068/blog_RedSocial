@@ -11,11 +11,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import dominio.Municipio;
-import dominio.Comun;
 import dominio.Usuario;
 import implementacionDAO.exceptions.NonexistentEntityException;
 import interfacesDAO.IUsuarioDAO;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -36,9 +34,6 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
     }
 
     public void create(Usuario usuario) {
-        if (usuario.getPublicacionesComunes() == null) {
-            usuario.setPublicacionesComunes(new ArrayList<Comun>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -48,25 +43,10 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
                 municipio = em.getReference(municipio.getClass(), municipio.getId());
                 usuario.setMunicipio(municipio);
             }
-            List<Comun> attachedPublicacionesComunes = new ArrayList<Comun>();
-            for (Comun publicacionesComunesComunToAttach : usuario.getPublicacionesComunes()) {
-                publicacionesComunesComunToAttach = em.getReference(publicacionesComunesComunToAttach.getClass(), publicacionesComunesComunToAttach.getId());
-                attachedPublicacionesComunes.add(publicacionesComunesComunToAttach);
-            }
-            usuario.setPublicacionesComunes(attachedPublicacionesComunes);
             em.persist(usuario);
             if (municipio != null) {
                 municipio.getUsuarios().add(usuario);
                 municipio = em.merge(municipio);
-            }
-            for (Comun publicacionesComunesComun : usuario.getPublicacionesComunes()) {
-                Usuario oldUsuarioOfPublicacionesComunesComun = publicacionesComunesComun.getUsuario();
-                publicacionesComunesComun.setUsuario(usuario);
-                publicacionesComunesComun = em.merge(publicacionesComunesComun);
-                if (oldUsuarioOfPublicacionesComunesComun != null) {
-                    oldUsuarioOfPublicacionesComunesComun.getPublicacionesComunes().remove(publicacionesComunesComun);
-                    oldUsuarioOfPublicacionesComunesComun = em.merge(oldUsuarioOfPublicacionesComunesComun);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -84,19 +64,10 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
             Usuario persistentUsuario = em.find(Usuario.class, usuario.getId());
             Municipio municipioOld = persistentUsuario.getMunicipio();
             Municipio municipioNew = usuario.getMunicipio();
-            List<Comun> publicacionesComunesOld = persistentUsuario.getPublicacionesComunes();
-            List<Comun> publicacionesComunesNew = usuario.getPublicacionesComunes();
             if (municipioNew != null) {
                 municipioNew = em.getReference(municipioNew.getClass(), municipioNew.getId());
                 usuario.setMunicipio(municipioNew);
             }
-            List<Comun> attachedPublicacionesComunesNew = new ArrayList<Comun>();
-            for (Comun publicacionesComunesNewComunToAttach : publicacionesComunesNew) {
-                publicacionesComunesNewComunToAttach = em.getReference(publicacionesComunesNewComunToAttach.getClass(), publicacionesComunesNewComunToAttach.getId());
-                attachedPublicacionesComunesNew.add(publicacionesComunesNewComunToAttach);
-            }
-            publicacionesComunesNew = attachedPublicacionesComunesNew;
-            usuario.setPublicacionesComunes(publicacionesComunesNew);
             usuario = em.merge(usuario);
             if (municipioOld != null && !municipioOld.equals(municipioNew)) {
                 municipioOld.getUsuarios().remove(usuario);
@@ -105,23 +76,6 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
             if (municipioNew != null && !municipioNew.equals(municipioOld)) {
                 municipioNew.getUsuarios().add(usuario);
                 municipioNew = em.merge(municipioNew);
-            }
-            for (Comun publicacionesComunesOldComun : publicacionesComunesOld) {
-                if (!publicacionesComunesNew.contains(publicacionesComunesOldComun)) {
-                    publicacionesComunesOldComun.setUsuario(null);
-                    publicacionesComunesOldComun = em.merge(publicacionesComunesOldComun);
-                }
-            }
-            for (Comun publicacionesComunesNewComun : publicacionesComunesNew) {
-                if (!publicacionesComunesOld.contains(publicacionesComunesNewComun)) {
-                    Usuario oldUsuarioOfPublicacionesComunesNewComun = publicacionesComunesNewComun.getUsuario();
-                    publicacionesComunesNewComun.setUsuario(usuario);
-                    publicacionesComunesNewComun = em.merge(publicacionesComunesNewComun);
-                    if (oldUsuarioOfPublicacionesComunesNewComun != null && !oldUsuarioOfPublicacionesComunesNewComun.equals(usuario)) {
-                        oldUsuarioOfPublicacionesComunesNewComun.getPublicacionesComunes().remove(publicacionesComunesNewComun);
-                        oldUsuarioOfPublicacionesComunesNewComun = em.merge(oldUsuarioOfPublicacionesComunesNewComun);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -156,11 +110,6 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
             if (municipio != null) {
                 municipio.getUsuarios().remove(usuario);
                 municipio = em.merge(municipio);
-            }
-            List<Comun> publicacionesComunes = usuario.getPublicacionesComunes();
-            for (Comun publicacionesComunesComun : publicacionesComunes) {
-                publicacionesComunesComun.setUsuario(null);
-                publicacionesComunesComun = em.merge(publicacionesComunesComun);
             }
             em.remove(usuario);
             em.getTransaction().commit();

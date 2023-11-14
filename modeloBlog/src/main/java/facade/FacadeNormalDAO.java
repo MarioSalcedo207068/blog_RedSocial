@@ -24,8 +24,8 @@ public class FacadeNormalDAO {
         this.normalDAO = normalDAO;
     }
 
-    public void create(Normal normal) {
-        normalDAO.create(normal);
+    public Normal create(Normal normal) {
+        return normalDAO.create(normal);
     }
 
     public void edit(Normal normal) {

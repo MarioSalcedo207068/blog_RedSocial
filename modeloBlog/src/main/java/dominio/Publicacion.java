@@ -33,7 +33,7 @@ public class Publicacion implements Serializable {
     @Column(name = "contenido", nullable = false, length = 1000)
     private String contenido;
 
-    @Column(name = "fechaEdicion", nullable = false)
+    @Column(name = "fechaEdicion", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar fechaHoraEdicion;
 

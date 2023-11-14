@@ -14,6 +14,7 @@ import dominio.Estado;
 import dominio.Municipio;
 import dominio.Usuario;
 import implementacionDAO.exceptions.NonexistentEntityException;
+import interfacesDAO.IComunDAO;
 import interfacesDAO.IMunicipioDAO;
 import java.util.ArrayList;
 import java.util.List;

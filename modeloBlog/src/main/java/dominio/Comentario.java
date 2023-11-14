@@ -5,10 +5,11 @@
 package dominio;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
+import org.eclipse.persistence.jpa.config.Cascade;
 
 /**
  * Clase que representa un comentario en el sistema.
@@ -24,7 +25,7 @@ public class Comentario implements Serializable {
 
     @Column(name = "fechaHora", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHora;
+    private Calendar fechaHora;
 
     @Column(name = "contenido", nullable = false, length = 300)
     private String contenido;
@@ -36,16 +37,16 @@ public class Comentario implements Serializable {
     private Normal usuarioNormal;
 
     //Relación con publicación comun
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "publicacionComun_id")
     private Comun publicacionComun;
 
     //Relación con publicación comentarios
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "comentarioPadre_id")
     private Comentario comentarioPadre;
 
-    @OneToMany(mappedBy = "comentarioPadre", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "comentarioPadre", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Comentario> comentarios;
 
     /**
@@ -63,7 +64,7 @@ public class Comentario implements Serializable {
      * @param usuarioNormal El usuario normal asociado al comentario.
      * @param publicacionComun La publicación común asociada al comentario.
      */
-    public Comentario(Date fechaHora, String contenido, Normal usuarioNormal, Comun publicacionComun) {
+    public Comentario(Calendar fechaHora, String contenido, Normal usuarioNormal, Comun publicacionComun) {
         this.fechaHora = fechaHora;
         this.contenido = contenido;
         this.usuarioNormal = usuarioNormal;
@@ -82,7 +83,7 @@ public class Comentario implements Serializable {
      * @param publicacionComun La publicación común asociada al comentario.
      * @param comentarios La lista de comentarios asociados al comentario.
      */
-    public Comentario(Long id, Date fechaHora, String contenido, Normal usuarioNormal, Comun publicacionComun, List<Comentario> comentarios) {
+    public Comentario(Long id, Calendar fechaHora, String contenido, Normal usuarioNormal, Comun publicacionComun, List<Comentario> comentarios) {
         this.id = id;
         this.fechaHora = fechaHora;
         this.contenido = contenido;
@@ -114,7 +115,7 @@ public class Comentario implements Serializable {
      *
      * @return La fecha y hora del comentario.
      */
-    public Date getFechaHora() {
+    public Calendar getFechaHora() {
         return fechaHora;
     }
 
@@ -123,7 +124,7 @@ public class Comentario implements Serializable {
      *
      * @param fechaHora La fecha y hora del comentario.
      */
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(Calendar fechaHora) {
         this.fechaHora = fechaHora;
     }
 

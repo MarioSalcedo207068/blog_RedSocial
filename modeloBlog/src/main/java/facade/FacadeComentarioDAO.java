@@ -24,8 +24,8 @@ public class FacadeComentarioDAO {
         this.comentarioDAO = comentarioDAO;
     }
 
-    public void create(Comentario comentario) {
-        comentarioDAO.create(comentario);
+    public Comentario create(Comentario comentario) {
+        return comentarioDAO.create(comentario);
     }
 
     public void edit(Comentario comentario) {

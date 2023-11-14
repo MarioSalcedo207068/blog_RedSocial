@@ -48,18 +48,14 @@ public class Usuario implements Serializable {
 
     //Relaciones
     //Relación con credencial
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "credencial_id", unique = true)
     private Credencial credencial;
 
     //Relación con municipio
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "municipio_id")
     private Municipio municipio;
-
-    //Relación con usuario
-    @OneToMany(mappedBy = "usuario")
-    private List<Comun> publicacionesComunes;
 
     /**
      * Constructor por defecto de la clase Usuario.
@@ -331,24 +327,6 @@ public class Usuario implements Serializable {
         this.municipio = municipio;
     }
 
-    /**
-     * Obtiene las publicaciones comunes del usuario.
-     *
-     * @return Las publicaciones comunes del usuario.
-     */
-    public List<Comun> getPublicacionesComunes() {
-        return publicacionesComunes;
-    }
-
-    /**
-     * Establece las publicaciones comunes del usuario.
-     *
-     * @param publicacionesComunes Las publicaciones comunes del usuario.
-     */
-    public void setPublicacionesComunes(List<Comun> publicacionesComunes) {
-        this.publicacionesComunes = publicacionesComunes;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -374,9 +352,6 @@ public class Usuario implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", nombres=" + nombres + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", telefono=" + telefono + ", avatar=" + avatar + ", ciudad=" + ciudad + ", fechaNacimiento=" + fechaNacimiento + ", genero=" + genero + ", credencial=" + credencial + ", municipio=" + municipio + ", publicacionesComunes=" + publicacionesComunes + '}';
-    }
+
 
 }

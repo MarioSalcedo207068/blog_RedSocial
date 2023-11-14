@@ -5,15 +5,17 @@
  */
 package implementacionDAO;
 
-import dominio.Comun;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dominio.Usuario;
+import dominio.Normal;
+import dominio.Comentario;
+import dominio.Comun;
 import implementacionDAO.exceptions.NonexistentEntityException;
 import interfacesDAO.IComunDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,22 +35,17 @@ public class ComunDAO implements Serializable, IComunDAO {
         return emf.createEntityManager();
     }
 
-    public void create(Comun comun) {
+    public Comun create(Comun comun) {
+        if (comun.getComentarios() == null) {
+            comun.setComentarios(new ArrayList<Comentario>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario usuario = comun.getUsuario();
-            if (usuario != null) {
-                usuario = em.getReference(usuario.getClass(), usuario.getId());
-                comun.setUsuario(usuario);
-            }
             em.persist(comun);
-            if (usuario != null) {
-                usuario.getPublicacionesComunes().add(comun);
-                usuario = em.merge(usuario);
-            }
             em.getTransaction().commit();
+            return comun;
         } finally {
             if (em != null) {
                 em.close();
@@ -62,20 +59,46 @@ public class ComunDAO implements Serializable, IComunDAO {
             em = getEntityManager();
             em.getTransaction().begin();
             Comun persistentComun = em.find(Comun.class, comun.getId());
-            Usuario usuarioOld = persistentComun.getUsuario();
-            Usuario usuarioNew = comun.getUsuario();
-            if (usuarioNew != null) {
-                usuarioNew = em.getReference(usuarioNew.getClass(), usuarioNew.getId());
-                comun.setUsuario(usuarioNew);
+            Normal usuarioNormalOld = persistentComun.getUsuarioNormal();
+            Normal usuarioNormalNew = comun.getUsuarioNormal();
+            List<Comentario> comentariosOld = persistentComun.getComentarios();
+            List<Comentario> comentariosNew = comun.getComentarios();
+            if (usuarioNormalNew != null) {
+                usuarioNormalNew = em.getReference(usuarioNormalNew.getClass(), usuarioNormalNew.getId());
+                comun.setUsuarioNormal(usuarioNormalNew);
             }
+            List<Comentario> attachedComentariosNew = new ArrayList<Comentario>();
+            for (Comentario comentariosNewComentarioToAttach : comentariosNew) {
+                comentariosNewComentarioToAttach = em.getReference(comentariosNewComentarioToAttach.getClass(), comentariosNewComentarioToAttach.getId());
+                attachedComentariosNew.add(comentariosNewComentarioToAttach);
+            }
+            comentariosNew = attachedComentariosNew;
+            comun.setComentarios(comentariosNew);
             comun = em.merge(comun);
-            if (usuarioOld != null && !usuarioOld.equals(usuarioNew)) {
-                usuarioOld.getPublicacionesComunes().remove(comun);
-                usuarioOld = em.merge(usuarioOld);
+            if (usuarioNormalOld != null && !usuarioNormalOld.equals(usuarioNormalNew)) {
+                usuarioNormalOld.getPublicacionesComunes().remove(comun);
+                usuarioNormalOld = em.merge(usuarioNormalOld);
             }
-            if (usuarioNew != null && !usuarioNew.equals(usuarioOld)) {
-                usuarioNew.getPublicacionesComunes().add(comun);
-                usuarioNew = em.merge(usuarioNew);
+            if (usuarioNormalNew != null && !usuarioNormalNew.equals(usuarioNormalOld)) {
+                usuarioNormalNew.getPublicacionesComunes().add(comun);
+                usuarioNormalNew = em.merge(usuarioNormalNew);
+            }
+            for (Comentario comentariosOldComentario : comentariosOld) {
+                if (!comentariosNew.contains(comentariosOldComentario)) {
+                    comentariosOldComentario.setPublicacionComun(null);
+                    comentariosOldComentario = em.merge(comentariosOldComentario);
+                }
+            }
+            for (Comentario comentariosNewComentario : comentariosNew) {
+                if (!comentariosOld.contains(comentariosNewComentario)) {
+                    Comun oldPublicacionComunOfComentariosNewComentario = comentariosNewComentario.getPublicacionComun();
+                    comentariosNewComentario.setPublicacionComun(comun);
+                    comentariosNewComentario = em.merge(comentariosNewComentario);
+                    if (oldPublicacionComunOfComentariosNewComentario != null && !oldPublicacionComunOfComentariosNewComentario.equals(comun)) {
+                        oldPublicacionComunOfComentariosNewComentario.getComentarios().remove(comentariosNewComentario);
+                        oldPublicacionComunOfComentariosNewComentario = em.merge(oldPublicacionComunOfComentariosNewComentario);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -101,17 +124,14 @@ public class ComunDAO implements Serializable, IComunDAO {
             em.getTransaction().begin();
             Comun comun;
             try {
-                comun = em.getReference(Comun.class, id);
-                comun.getId();
+                comun = em.find(Comun.class, id);
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The comun with id " + id + " no longer exists.", enfe);
             }
-            Usuario usuario = comun.getUsuario();
-            if (usuario != null) {
-                usuario.getPublicacionesComunes().remove(comun);
-                usuario = em.merge(usuario);
+            if (comun != null) {
+                em.remove(comun);
             }
-            em.remove(comun);
+            //comentario = em.merge(comentario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {

@@ -11,12 +11,13 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import dominio.Municipio;
+import dominio.Comentario;
+import java.util.ArrayList;
+import java.util.List;
 import dominio.Comun;
 import dominio.Normal;
 import implementacionDAO.exceptions.NonexistentEntityException;
 import interfacesDAO.INormalDAO;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -35,40 +36,16 @@ public class NormalDAO implements Serializable, INormalDAO {
         return emf.createEntityManager();
     }
 
-    public void create(Normal normal) {
-        if (normal.getPublicacionesComunes() == null) {
-            normal.setPublicacionesComunes(new ArrayList<Comun>());
-        }
+    public Normal create(Normal normal) {
+
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Municipio municipio = normal.getMunicipio();
-            if (municipio != null) {
-                municipio = em.getReference(municipio.getClass(), municipio.getId());
-                normal.setMunicipio(municipio);
-            }
-            List<Comun> attachedPublicacionesComunes = new ArrayList<Comun>();
-            for (Comun publicacionesComunesComunToAttach : normal.getPublicacionesComunes()) {
-                publicacionesComunesComunToAttach = em.getReference(publicacionesComunesComunToAttach.getClass(), publicacionesComunesComunToAttach.getId());
-                attachedPublicacionesComunes.add(publicacionesComunesComunToAttach);
-            }
-            normal.setPublicacionesComunes(attachedPublicacionesComunes);
             em.persist(normal);
-            if (municipio != null) {
-                municipio.getUsuarios().add(normal);
-                municipio = em.merge(municipio);
-            }
-            for (Comun publicacionesComunesComun : normal.getPublicacionesComunes()) {
-                dominio.Usuario oldUsuarioOfPublicacionesComunesComun = publicacionesComunesComun.getUsuario();
-                publicacionesComunesComun.setUsuario(normal);
-                publicacionesComunesComun = em.merge(publicacionesComunesComun);
-                if (oldUsuarioOfPublicacionesComunesComun != null) {
-                    oldUsuarioOfPublicacionesComunesComun.getPublicacionesComunes().remove(publicacionesComunesComun);
-                    oldUsuarioOfPublicacionesComunesComun = em.merge(oldUsuarioOfPublicacionesComunesComun);
-                }
-            }
             em.getTransaction().commit();
+            em.refresh(normal);
+            return normal;
         } finally {
             if (em != null) {
                 em.close();
@@ -84,12 +61,21 @@ public class NormalDAO implements Serializable, INormalDAO {
             Normal persistentNormal = em.find(Normal.class, normal.getId());
             Municipio municipioOld = persistentNormal.getMunicipio();
             Municipio municipioNew = normal.getMunicipio();
+            List<Comentario> comenatariosOld = persistentNormal.getComenatarios();
+            List<Comentario> comenatariosNew = normal.getComenatarios();
             List<Comun> publicacionesComunesOld = persistentNormal.getPublicacionesComunes();
             List<Comun> publicacionesComunesNew = normal.getPublicacionesComunes();
             if (municipioNew != null) {
                 municipioNew = em.getReference(municipioNew.getClass(), municipioNew.getId());
                 normal.setMunicipio(municipioNew);
             }
+            List<Comentario> attachedComenatariosNew = new ArrayList<Comentario>();
+            for (Comentario comenatariosNewComentarioToAttach : comenatariosNew) {
+                comenatariosNewComentarioToAttach = em.getReference(comenatariosNewComentarioToAttach.getClass(), comenatariosNewComentarioToAttach.getId());
+                attachedComenatariosNew.add(comenatariosNewComentarioToAttach);
+            }
+            comenatariosNew = attachedComenatariosNew;
+            normal.setComenatarios(comenatariosNew);
             List<Comun> attachedPublicacionesComunesNew = new ArrayList<Comun>();
             for (Comun publicacionesComunesNewComunToAttach : publicacionesComunesNew) {
                 publicacionesComunesNewComunToAttach = em.getReference(publicacionesComunesNewComunToAttach.getClass(), publicacionesComunesNewComunToAttach.getId());
@@ -106,20 +92,37 @@ public class NormalDAO implements Serializable, INormalDAO {
                 municipioNew.getUsuarios().add(normal);
                 municipioNew = em.merge(municipioNew);
             }
+            for (Comentario comenatariosOldComentario : comenatariosOld) {
+                if (!comenatariosNew.contains(comenatariosOldComentario)) {
+                    comenatariosOldComentario.setUsuarioNormal(null);
+                    comenatariosOldComentario = em.merge(comenatariosOldComentario);
+                }
+            }
+            for (Comentario comenatariosNewComentario : comenatariosNew) {
+                if (!comenatariosOld.contains(comenatariosNewComentario)) {
+                    Normal oldUsuarioNormalOfComenatariosNewComentario = comenatariosNewComentario.getUsuarioNormal();
+                    comenatariosNewComentario.setUsuarioNormal(normal);
+                    comenatariosNewComentario = em.merge(comenatariosNewComentario);
+                    if (oldUsuarioNormalOfComenatariosNewComentario != null && !oldUsuarioNormalOfComenatariosNewComentario.equals(normal)) {
+                        oldUsuarioNormalOfComenatariosNewComentario.getComenatarios().remove(comenatariosNewComentario);
+                        oldUsuarioNormalOfComenatariosNewComentario = em.merge(oldUsuarioNormalOfComenatariosNewComentario);
+                    }
+                }
+            }
             for (Comun publicacionesComunesOldComun : publicacionesComunesOld) {
                 if (!publicacionesComunesNew.contains(publicacionesComunesOldComun)) {
-                    publicacionesComunesOldComun.setUsuario(null);
+                    publicacionesComunesOldComun.setUsuarioNormal(null);
                     publicacionesComunesOldComun = em.merge(publicacionesComunesOldComun);
                 }
             }
             for (Comun publicacionesComunesNewComun : publicacionesComunesNew) {
                 if (!publicacionesComunesOld.contains(publicacionesComunesNewComun)) {
-                    Normal oldUsuarioOfPublicacionesComunesNewComun = (Normal) publicacionesComunesNewComun.getUsuario();
-                    publicacionesComunesNewComun.setUsuario(normal);
+                    Normal oldUsuarioNormalOfPublicacionesComunesNewComun = publicacionesComunesNewComun.getUsuarioNormal();
+                    publicacionesComunesNewComun.setUsuarioNormal(normal);
                     publicacionesComunesNewComun = em.merge(publicacionesComunesNewComun);
-                    if (oldUsuarioOfPublicacionesComunesNewComun != null && !oldUsuarioOfPublicacionesComunesNewComun.equals(normal)) {
-                        oldUsuarioOfPublicacionesComunesNewComun.getPublicacionesComunes().remove(publicacionesComunesNewComun);
-                        oldUsuarioOfPublicacionesComunesNewComun = em.merge(oldUsuarioOfPublicacionesComunesNewComun);
+                    if (oldUsuarioNormalOfPublicacionesComunesNewComun != null && !oldUsuarioNormalOfPublicacionesComunesNewComun.equals(normal)) {
+                        oldUsuarioNormalOfPublicacionesComunesNewComun.getPublicacionesComunes().remove(publicacionesComunesNewComun);
+                        oldUsuarioNormalOfPublicacionesComunesNewComun = em.merge(oldUsuarioNormalOfPublicacionesComunesNewComun);
                     }
                 }
             }
@@ -157,9 +160,14 @@ public class NormalDAO implements Serializable, INormalDAO {
                 municipio.getUsuarios().remove(normal);
                 municipio = em.merge(municipio);
             }
+            List<Comentario> comenatarios = normal.getComenatarios();
+            for (Comentario comenatariosComentario : comenatarios) {
+                comenatariosComentario.setUsuarioNormal(null);
+                comenatariosComentario = em.merge(comenatariosComentario);
+            }
             List<Comun> publicacionesComunes = normal.getPublicacionesComunes();
             for (Comun publicacionesComunesComun : publicacionesComunes) {
-                publicacionesComunesComun.setUsuario(null);
+                publicacionesComunesComun.setUsuarioNormal(null);
                 publicacionesComunesComun = em.merge(publicacionesComunesComun);
             }
             em.remove(normal);

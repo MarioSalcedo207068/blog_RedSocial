@@ -24,8 +24,8 @@ public class FacadeComunDAO {
         this.comunDAO = comunDAO;
     }
 
-    public void create(Comun comun) {
-        comunDAO.create(comun);
+    public Comun create(Comun comun) {
+        return comunDAO.create(comun);
     }
 
     public void edit(Comun comun) {

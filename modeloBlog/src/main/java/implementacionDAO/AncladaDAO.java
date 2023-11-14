@@ -38,16 +38,7 @@ public class AncladaDAO implements Serializable, IAncladaDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Administrador admin = anclada.getAdmin();
-            if (admin != null) {
-                admin = em.getReference(admin.getClass(), admin.getId());
-                anclada.setAdmin(admin);
-            }
             em.persist(anclada);
-            if (admin != null) {
-                admin.getPublicacionesAncladas().add(anclada);
-                admin = em.merge(admin);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {

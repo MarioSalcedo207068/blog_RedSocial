@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IComunDAO {
 
-    public void create(Comun comun);
+    public Comun create(Comun comun);
 
     public void edit(Comun comun) throws NonexistentEntityException, Exception;
 

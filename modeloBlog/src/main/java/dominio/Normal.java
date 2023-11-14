@@ -17,8 +17,12 @@ import javax.persistence.*;
 public class Normal extends Usuario implements Serializable {
 
     //Relaciones
-    @OneToMany(mappedBy = "normal")
+    @OneToMany(mappedBy = "usuarioNormal", cascade = CascadeType.REMOVE)
     private List<Comentario> comenatarios;
+
+    //Relación con usuario
+    @OneToMany(mappedBy = "usuarioNormal")
+    private List<Comun> publicacionesComunes;
 
     public Normal() {
     }
@@ -53,6 +57,14 @@ public class Normal extends Usuario implements Serializable {
      */
     public void setComenatarios(List<Comentario> comenatarios) {
         this.comenatarios = comenatarios;
+    }
+
+    public List<Comun> getPublicacionesComunes() {
+        return publicacionesComunes;
+    }
+
+    public void setPublicacionesComunes(List<Comun> publicacionesComunes) {
+        this.publicacionesComunes = publicacionesComunes;
     }
 
 }

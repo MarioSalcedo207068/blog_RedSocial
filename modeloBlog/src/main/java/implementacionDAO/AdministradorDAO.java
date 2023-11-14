@@ -10,20 +10,19 @@ import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import dominio.Municipio;
-import dominio.Comun;
 import implementacionDAO.exceptions.NonexistentEntityException;
-import java.util.ArrayList;
+import interfacesDAO.IAdministradorDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import interfacesDAO.IAdministradorDAO;
 
 /**
  *
  * @author HP
  */
-public class AdministradorDAO implements Serializable, IAdministradorDAO {
+public class AdministradorDAO implements Serializable, IAdministradorDAO{
 
     public AdministradorDAO(EntityManagerFactory emf) {
         this.emf = emf;
@@ -35,9 +34,6 @@ public class AdministradorDAO implements Serializable, IAdministradorDAO {
     }
 
     public void create(Administrador administrador) {
-        if (administrador.getPublicacionesComunes() == null) {
-            administrador.setPublicacionesComunes(new ArrayList<Comun>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,25 +43,10 @@ public class AdministradorDAO implements Serializable, IAdministradorDAO {
                 municipio = em.getReference(municipio.getClass(), municipio.getId());
                 administrador.setMunicipio(municipio);
             }
-            List<Comun> attachedPublicacionesComunes = new ArrayList<Comun>();
-            for (Comun publicacionesComunesComunToAttach : administrador.getPublicacionesComunes()) {
-                publicacionesComunesComunToAttach = em.getReference(publicacionesComunesComunToAttach.getClass(), publicacionesComunesComunToAttach.getId());
-                attachedPublicacionesComunes.add(publicacionesComunesComunToAttach);
-            }
-            administrador.setPublicacionesComunes(attachedPublicacionesComunes);
             em.persist(administrador);
             if (municipio != null) {
                 municipio.getUsuarios().add(administrador);
                 municipio = em.merge(municipio);
-            }
-            for (Comun publicacionesComunesComun : administrador.getPublicacionesComunes()) {
-                dominio.Usuario oldUsuarioOfPublicacionesComunesComun = publicacionesComunesComun.getUsuario();
-                publicacionesComunesComun.setUsuario(administrador);
-                publicacionesComunesComun = em.merge(publicacionesComunesComun);
-                if (oldUsuarioOfPublicacionesComunesComun != null) {
-                    oldUsuarioOfPublicacionesComunesComun.getPublicacionesComunes().remove(publicacionesComunesComun);
-                    oldUsuarioOfPublicacionesComunesComun = em.merge(oldUsuarioOfPublicacionesComunesComun);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -75,13 +56,6 @@ public class AdministradorDAO implements Serializable, IAdministradorDAO {
         }
     }
 
-    /**
-     *
-     * @param administrador
-     * @throws NonexistentEntityException
-     * @throws Exception
-     */
-    @Override
     public void edit(Administrador administrador) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -90,19 +64,10 @@ public class AdministradorDAO implements Serializable, IAdministradorDAO {
             Administrador persistentAdministrador = em.find(Administrador.class, administrador.getId());
             Municipio municipioOld = persistentAdministrador.getMunicipio();
             Municipio municipioNew = administrador.getMunicipio();
-            List<Comun> publicacionesComunesOld = persistentAdministrador.getPublicacionesComunes();
-            List<Comun> publicacionesComunesNew = administrador.getPublicacionesComunes();
             if (municipioNew != null) {
                 municipioNew = em.getReference(municipioNew.getClass(), municipioNew.getId());
                 administrador.setMunicipio(municipioNew);
             }
-            List<Comun> attachedPublicacionesComunesNew = new ArrayList<Comun>();
-            for (Comun publicacionesComunesNewComunToAttach : publicacionesComunesNew) {
-                publicacionesComunesNewComunToAttach = em.getReference(publicacionesComunesNewComunToAttach.getClass(), publicacionesComunesNewComunToAttach.getId());
-                attachedPublicacionesComunesNew.add(publicacionesComunesNewComunToAttach);
-            }
-            publicacionesComunesNew = attachedPublicacionesComunesNew;
-            administrador.setPublicacionesComunes(publicacionesComunesNew);
             administrador = em.merge(administrador);
             if (municipioOld != null && !municipioOld.equals(municipioNew)) {
                 municipioOld.getUsuarios().remove(administrador);
@@ -111,23 +76,6 @@ public class AdministradorDAO implements Serializable, IAdministradorDAO {
             if (municipioNew != null && !municipioNew.equals(municipioOld)) {
                 municipioNew.getUsuarios().add(administrador);
                 municipioNew = em.merge(municipioNew);
-            }
-            for (Comun publicacionesComunesOldComun : publicacionesComunesOld) {
-                if (!publicacionesComunesNew.contains(publicacionesComunesOldComun)) {
-                    publicacionesComunesOldComun.setUsuario(null);
-                    publicacionesComunesOldComun = em.merge(publicacionesComunesOldComun);
-                }
-            }
-            for (Comun publicacionesComunesNewComun : publicacionesComunesNew) {
-                if (!publicacionesComunesOld.contains(publicacionesComunesNewComun)) {
-                    Administrador oldUsuarioOfPublicacionesComunesNewComun = (Administrador) publicacionesComunesNewComun.getUsuario();
-                    publicacionesComunesNewComun.setUsuario(administrador);
-                    publicacionesComunesNewComun = em.merge(publicacionesComunesNewComun);
-                    if (oldUsuarioOfPublicacionesComunesNewComun != null && !oldUsuarioOfPublicacionesComunesNewComun.equals(administrador)) {
-                        oldUsuarioOfPublicacionesComunesNewComun.getPublicacionesComunes().remove(publicacionesComunesNewComun);
-                        oldUsuarioOfPublicacionesComunesNewComun = em.merge(oldUsuarioOfPublicacionesComunesNewComun);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -162,11 +110,6 @@ public class AdministradorDAO implements Serializable, IAdministradorDAO {
             if (municipio != null) {
                 municipio.getUsuarios().remove(administrador);
                 municipio = em.merge(municipio);
-            }
-            List<Comun> publicacionesComunes = administrador.getPublicacionesComunes();
-            for (Comun publicacionesComunesComun : publicacionesComunes) {
-                publicacionesComunesComun.setUsuario(null);
-                publicacionesComunesComun = em.merge(publicacionesComunesComun);
             }
             em.remove(administrador);
             em.getTransaction().commit();
@@ -210,4 +153,17 @@ public class AdministradorDAO implements Serializable, IAdministradorDAO {
         }
     }
 
+    public int getAdministradorCount() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Administrador> rt = cq.from(Administrador.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
 }

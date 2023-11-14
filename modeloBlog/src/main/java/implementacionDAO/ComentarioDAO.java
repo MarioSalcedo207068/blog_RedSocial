@@ -35,58 +35,15 @@ public class ComentarioDAO implements Serializable, IComentarioDAO {
         return emf.createEntityManager();
     }
 
-    public void create(Comentario comentario) {
-        if (comentario.getComentarios() == null) {
-            comentario.setComentarios(new ArrayList<Comentario>());
-        }
+    public Comentario create(Comentario comentario) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Normal usuarioNormal = comentario.getUsuarioNormal();
-            if (usuarioNormal != null) {
-                usuarioNormal = em.getReference(usuarioNormal.getClass(), usuarioNormal.getId());
-                comentario.setUsuarioNormal(usuarioNormal);
-            }
-            Comun publicacionComun = comentario.getPublicacionComun();
-            if (publicacionComun != null) {
-                publicacionComun = em.getReference(publicacionComun.getClass(), publicacionComun.getId());
-                comentario.setPublicacionComun(publicacionComun);
-            }
-            Comentario comentarioPadre = comentario.getComentarioPadre();
-            if (comentarioPadre != null) {
-                comentarioPadre = em.getReference(comentarioPadre.getClass(), comentarioPadre.getId());
-                comentario.setComentarioPadre(comentarioPadre);
-            }
-            List<Comentario> attachedComentarios = new ArrayList<Comentario>();
-            for (Comentario comentariosComentarioToAttach : comentario.getComentarios()) {
-                comentariosComentarioToAttach = em.getReference(comentariosComentarioToAttach.getClass(), comentariosComentarioToAttach.getId());
-                attachedComentarios.add(comentariosComentarioToAttach);
-            }
-            comentario.setComentarios(attachedComentarios);
             em.persist(comentario);
-            if (usuarioNormal != null) {
-                usuarioNormal.getComenatarios().add(comentario);
-                usuarioNormal = em.merge(usuarioNormal);
-            }
-            if (publicacionComun != null) {
-                publicacionComun.getComentarios().add(comentario);
-                publicacionComun = em.merge(publicacionComun);
-            }
-            if (comentarioPadre != null) {
-                comentarioPadre.getComentarios().add(comentario);
-                comentarioPadre = em.merge(comentarioPadre);
-            }
-            for (Comentario comentariosComentario : comentario.getComentarios()) {
-                Comentario oldComentarioPadreOfComentariosComentario = comentariosComentario.getComentarioPadre();
-                comentariosComentario.setComentarioPadre(comentario);
-                comentariosComentario = em.merge(comentariosComentario);
-                if (oldComentarioPadreOfComentariosComentario != null) {
-                    oldComentarioPadreOfComentariosComentario.getComentarios().remove(comentariosComentario);
-                    oldComentarioPadreOfComentariosComentario = em.merge(oldComentarioPadreOfComentariosComentario);
-                }
-            }
             em.getTransaction().commit();
+            em.refresh(comentario);
+            return comentario;
         } finally {
             if (em != null) {
                 em.close();
@@ -193,38 +150,21 @@ public class ComentarioDAO implements Serializable, IComentarioDAO {
             em.getTransaction().begin();
             Comentario comentario;
             try {
-                comentario = em.getReference(Comentario.class, id);
-                comentario.getId();
+                comentario = em.find(Comentario.class, id);
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The comentario with id " + id + " no longer exists.", enfe);
             }
-            Normal usuarioNormal = comentario.getUsuarioNormal();
-            if (usuarioNormal != null) {
-                usuarioNormal.getComenatarios().remove(comentario);
-                usuarioNormal = em.merge(usuarioNormal);
+            if (comentario != null) {
+                em.remove(comentario);
             }
-            Comun publicacionComun = comentario.getPublicacionComun();
-            if (publicacionComun != null) {
-                publicacionComun.getComentarios().remove(comentario);
-                publicacionComun = em.merge(publicacionComun);
-            }
-            Comentario comentarioPadre = comentario.getComentarioPadre();
-            if (comentarioPadre != null) {
-                comentarioPadre.getComentarios().remove(comentario);
-                comentarioPadre = em.merge(comentarioPadre);
-            }
-            List<Comentario> comentarios = comentario.getComentarios();
-            for (Comentario comentariosComentario : comentarios) {
-                comentariosComentario.setComentarioPadre(null);
-                comentariosComentario = em.merge(comentariosComentario);
-            }
-            em.remove(comentario);
+            //comentario = em.merge(comentario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+
     }
 
     public List<Comentario> findComentarioEntities() {

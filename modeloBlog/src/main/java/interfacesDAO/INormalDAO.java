@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface INormalDAO {
 
-    public void create(Normal normal);
+    public Normal create(Normal normal);
 
     public void edit(Normal normal) throws NonexistentEntityException, Exception;
 

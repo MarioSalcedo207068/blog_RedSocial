@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IComentarioDAO {
 
-    public void create(Comentario comentario);
+    public Comentario create(Comentario comentario);
 
     public void edit(Comentario comentario) throws NonexistentEntityException, Exception;
 

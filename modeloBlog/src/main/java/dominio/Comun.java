@@ -17,11 +17,11 @@ import javax.persistence.*;
 public class Comun extends Publicacion implements Serializable {
 
     //Relaciones
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @ManyToOne()
+    @JoinColumn(name = "usuarioNormal_id")
+    private Normal usuarioNormal;
 
-    @OneToMany(mappedBy = "comun")
+    @OneToMany(mappedBy = "publicacionComun", cascade = CascadeType.REMOVE)
     private List<Comentario> comentarios;
 
     /**
@@ -33,16 +33,16 @@ public class Comun extends Publicacion implements Serializable {
     /**
      * Constructor que recibe el usuario asociado a la publicación común.
      *
-     * @param usuario El usuario asociado a la publicación común.
+     * @param Normal El usuario asociado a la publicación común.
      */
-    public Comun(Usuario usuario) {
-        this.usuario = usuario;
+    public Comun(Normal Normal) {
+        this.usuarioNormal = Normal;
     }
 
-    public Comun(Usuario usuario, Calendar fechaHoraCreacion, String titulo,
+    public Comun(Normal normal, Calendar fechaHoraCreacion, String titulo,
             String contenido) {
         super(fechaHoraCreacion, titulo, contenido);
-        this.usuario = usuario;
+        this.usuarioNormal = normal;
     }
 
     /**
@@ -58,10 +58,10 @@ public class Comun extends Publicacion implements Serializable {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * común.
      */
-    public Comun(Usuario usuario, Calendar fechaHoraCreacion, String titulo,
+    public Comun(Normal normal, Calendar fechaHoraCreacion, String titulo,
             String contenido, Calendar fechaHoraEdicion) {
         super(fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
-        this.usuario = usuario;
+        this.usuarioNormal = normal;
     }
 
     /**
@@ -69,7 +69,7 @@ public class Comun extends Publicacion implements Serializable {
      * creación, el título, el contenido y la fecha y hora de edición de la
      * publicación común.
      *
-     * @param usuario El usuario asociado a la publicación común.
+     * @param normal El usuario asociado a la publicación común.
      * @param id El ID de la publicación común.
      * @param fechaHoraCreacion La fecha y hora de creación de la publicación
      * común.
@@ -78,10 +78,10 @@ public class Comun extends Publicacion implements Serializable {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * común.
      */
-    public Comun(Usuario usuario, Long id, Calendar fechaHoraCreacion, String titulo,
+    public Comun(Normal normal, Long id, Calendar fechaHoraCreacion, String titulo,
             String contenido, Calendar fechaHoraEdicion) {
         super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
-        this.usuario = usuario;
+        this.usuarioNormal = normal;
     }
 
     /**
@@ -89,17 +89,17 @@ public class Comun extends Publicacion implements Serializable {
      *
      * @return El usuario asociado a la publicación común.
      */
-    public Usuario getUsuario() {
-        return usuario;
+    public Normal getUsuarioNormal() {
+        return usuarioNormal;
     }
 
     /**
      * Establece el usuario asociado a la publicación común.
      *
-     * @param usuario El usuario asociado a la publicación común.
+     * @param normal El usuario asociado a la publicación común.
      */
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarioNormal(Normal normal) {
+        this.usuarioNormal = normal;
     }
 
     /**
@@ -123,7 +123,7 @@ public class Comun extends Publicacion implements Serializable {
 
     @Override
     public String toString() {
-        return "Comun{" + "usuario=" + usuario + ", comentarios=" + comentarios + '}';
+        return "Comun{" + "usuario=" + usuarioNormal + ", comentarios=" + comentarios + '}';
     }
 
 }
