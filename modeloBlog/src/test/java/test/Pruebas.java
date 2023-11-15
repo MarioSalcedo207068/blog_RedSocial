@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -36,16 +37,22 @@ public class Pruebas {
         // TODO code application logic here
         IFacade facade = new Facade();
 
+        Scanner tec = new Scanner(System.in);
+
         //Registrar Uuario normal
+        System.out.println("---------------------------------------");
+        System.out.println("Registrar Usuario normal");
         Normal usuario = new Normal("Daniel", "Lopez", "Lopez", "6442121807",
                 "Daoma", "cd. obregon", new GregorianCalendar(2, 2, 1994), Genero.MASCULINO,
                 new Credencial("daoma@hotmail.com", "1234"),
                 new Municipio("cajeme", new Estado("Sonora")));
 
         usuario = facade.useNormalDAO().create(usuario);
-
-        Normal UsuNormal = usuario;
+        System.out.print("");
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Validar inicio de sesion
+        System.out.println("Validar inicio de sesion");
         List<Usuario> usuarios = facade.useUsuarioDAO().findUsuarioEntities();
         String correo = "daoma@hotmail.com";
         String contrasenia = "1234";
@@ -57,18 +64,24 @@ public class Pruebas {
                 System.out.println("Bienvenido " + usuarios.get(i).getNombres());
             }
         }
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Registrar publicacion
-        Comun publicacion = new Comun(UsuNormal, Calendar.getInstance(),
+        System.out.println("Registrar publicacion");
+        Comun publicacion = new Comun(usuario, Calendar.getInstance(),
                 "El mundo", "Que bonito esta");
 
         publicacion = facade.useComunDAO().create(publicacion);
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Registrar comentario
+        System.out.println("Registrar comentario y comentario anclada");
         Comentario comentario = new Comentario(Calendar.getInstance(),
-                "Interesante", UsuNormal, publicacion);
+                "Interesante", usuario, publicacion);
 
         //Registrar comentario anclado
         Comentario comentario1 = new Comentario(Calendar.getInstance(),
-                "Interesante 2", UsuNormal, publicacion);
+                "Interesante 2", usuario, publicacion);
         comentario1.setComentarioPadre(comentario);
 
         List<Comentario> comentarios = new ArrayList<>();
@@ -78,11 +91,16 @@ public class Pruebas {
 
         facade.useComentarioDAO().create(comentario);
 
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Editar Publicacion
+        System.out.println("Editar Publicacion");
         publicacion.setContenido("Que bonito esta 2");
         facade.useComunDAO().edit(publicacion);
-
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Crear publicacion anclada
+        System.out.println("Crear publicacion anclada");
         Administrador administrador = new Administrador("Ana", "García", "Martínez", "5551234567",
                 "Calle Principal 123", "Ciudad de México", new GregorianCalendar(15, 8, 1990), Genero.FEMENINO,
                 new Credencial("ana@gmail.com", "abcd5678"),
@@ -91,15 +109,19 @@ public class Pruebas {
         Anclada anclada = new Anclada(administrador, Calendar.getInstance(), "El universo", "impresionante");
         anclada.setAdmin(administrador);
         facade.useAncladaDAO().create(anclada);
-
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         // Permite consultar todas las publicaciones
+        System.out.println("Permite consultar todas las publicaciones");
         System.out.println("Publicaciones");
         List<Publicacion> publicaciones = facade.usePublicacionDAO().findPublicacionEntities();
         for (int i = 0; i < publicaciones.size(); i++) {
             System.out.println(publicaciones.toString());
         }
-
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Permite consultar los comentarios de las publicaciones
+        System.out.println("Permite consultar los comentarios de las publicaciones");
         comentarios = facade.useComentarioDAO().findComentarioEntities();
         System.out.println("Comentarios");
         for (int i = 0; i < comentarios.size(); i++) {
@@ -107,10 +129,19 @@ public class Pruebas {
                 System.out.println(comentarios.get(i).toString());
             }
         }
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Permite eliminar comentarios
+        System.out.println("Permite eliminar comentarios");
         facade.useComentarioDAO().destroy(comentario.getId());
+        System.out.print("");
+        tec.nextLine();
+        System.out.println("---------------------------------------");
         //Permite eliminar publicaciones
+        System.out.println("Permite eliminar publicaciones");
         facade.useComunDAO().destroy(publicacion.getId());
+        tec.nextLine();
+        System.out.println("---------------------------------------");
 
     }
 
