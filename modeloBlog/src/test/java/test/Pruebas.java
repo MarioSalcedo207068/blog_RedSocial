@@ -106,7 +106,8 @@ public class Pruebas {
                 new Credencial("ana@gmail.com", "abcd5678"),
                 new Municipio("Benito Juárez", new Estado("Ciudad de México")));
 
-        Anclada anclada = new Anclada(administrador, Calendar.getInstance(), "El universo", "impresionante");
+        Anclada anclada = new Anclada(administrador, Calendar.getInstance(), "El universo",
+                "impresionante");
         anclada.setAdmin(administrador);
         facade.useAncladaDAO().create(anclada);
         tec.nextLine();
