@@ -1,0 +1,8 @@
+img
+{
+    height: 500px;
+    width: 500px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dfdfdf;
+}
