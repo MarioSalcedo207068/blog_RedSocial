@@ -21,43 +21,8 @@ public class Facade implements IFacade {
     }
 
     @Override
-    public FacadeAdministradorDAO useAdministradorDAO() {
-        return new FacadeAdministradorDAO(factoryDAO.crearAdministradorDAO());
-    }
-
-    @Override
-    public FacadeAncladaDAO useAncladaDAO() {
-        return new FacadeAncladaDAO(factoryDAO.crearAncladaDAO());
-    }
-
-    @Override
     public FacadeComentarioDAO useComentarioDAO() {
         return new FacadeComentarioDAO(factoryDAO.crearComentarioDAO());
-    }
-
-    @Override
-    public FacadeComunDAO useComunDAO() {
-        return new FacadeComunDAO(factoryDAO.crearComunDAO());
-    }
-
-    @Override
-    public FacadeCredencialDAO useCredencialDAO() {
-        return new FacadeCredencialDAO(factoryDAO.crearCredencialDAO());
-    }
-
-    @Override
-    public FacadeEstadoDAO useEstadoDAO() {
-        return new FacadeEstadoDAO(factoryDAO.crearEstadoDAO());
-    }
-
-    @Override
-    public FacadeMunicipioDAO useMunicipioDAO() {
-        return new FacadeMunicipioDAO(factoryDAO.crearMunicipioDAO());
-    }
-
-    @Override
-    public FacadeNormalDAO useNormalDAO() {
-        return new FacadeNormalDAO(factoryDAO.crearNormalDAO());
     }
 
     @Override

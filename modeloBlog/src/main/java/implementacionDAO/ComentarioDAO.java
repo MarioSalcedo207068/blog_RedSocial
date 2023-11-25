@@ -9,7 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+
 import dominio.Normal;
 import dominio.Comun;
 import dominio.Comentario;
@@ -171,10 +171,6 @@ public class ComentarioDAO implements Serializable, IComentarioDAO {
         return findComentarioEntities(true, -1, -1);
     }
 
-    public List<Comentario> findComentarioEntities(int maxResults, int firstResult) {
-        return findComentarioEntities(false, maxResults, firstResult);
-    }
-
     private List<Comentario> findComentarioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
@@ -195,19 +191,6 @@ public class ComentarioDAO implements Serializable, IComentarioDAO {
         EntityManager em = getEntityManager();
         try {
             return em.find(Comentario.class, id);
-        } finally {
-            em.close();
-        }
-    }
-
-    public int getComentarioCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Comentario> rt = cq.from(Comentario.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

@@ -13,21 +13,7 @@ import interfacesDAO.*;
  */
 public interface IFactoryDAO {
 
-    public IAdministradorDAO crearAdministradorDAO();
-
-    public IAncladaDAO crearAncladaDAO();
-
     public IComentarioDAO crearComentarioDAO();
-
-    public IComunDAO crearComunDAO();
-
-    public ICredencialDAO crearCredencialDAO();
-
-    public IEstadoDAO crearEstadoDAO();
-
-    public IMunicipioDAO crearMunicipioDAO();
-
-    public INormalDAO crearNormalDAO();
 
     public IPublicacionDAO crearPublicacionDAO();
 

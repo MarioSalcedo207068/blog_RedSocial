@@ -9,7 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import dominio.Municipio;
 import dominio.Usuario;
 import implementacionDAO.exceptions.NonexistentEntityException;
@@ -148,19 +147,6 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
         EntityManager em = getEntityManager();
         try {
             return em.find(Usuario.class, id);
-        } finally {
-            em.close();
-        }
-    }
-
-    public int getUsuarioCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Usuario> rt = cq.from(Usuario.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
         }

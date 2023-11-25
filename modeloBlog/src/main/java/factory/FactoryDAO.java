@@ -23,43 +23,8 @@ public class FactoryDAO implements IFactoryDAO {
     }
 
     @Override
-    public IAdministradorDAO crearAdministradorDAO() {
-        return new AdministradorDAO(conexionBD.usarBD());
-    }
-
-    @Override
-    public IAncladaDAO crearAncladaDAO() {
-        return new AncladaDAO(conexionBD.usarBD());
-    }
-
-    @Override
     public IComentarioDAO crearComentarioDAO() {
         return new ComentarioDAO(conexionBD.usarBD());
-    }
-
-    @Override
-    public IComunDAO crearComunDAO() {
-        return new ComunDAO(conexionBD.usarBD());
-    }
-
-    @Override
-    public ICredencialDAO crearCredencialDAO() {
-        return new CredencialDAO(conexionBD.usarBD());
-    }
-
-    @Override
-    public IEstadoDAO crearEstadoDAO() {
-        return new EstadoDAO(conexionBD.usarBD());
-    }
-
-    @Override
-    public IMunicipioDAO crearMunicipioDAO() {
-        return new MunicipioDAO(conexionBD.usarBD());
-    }
-
-    @Override
-    public INormalDAO crearNormalDAO() {
-        return new NormalDAO(conexionBD.usarBD());
     }
 
     @Override

@@ -126,17 +126,6 @@ public class PublicacionDAO implements Serializable, IPublicacionDAO {
         }
     }
 
-    public int getPublicacionCount() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Publicacion> rt = cq.from(Publicacion.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
+
 
 }

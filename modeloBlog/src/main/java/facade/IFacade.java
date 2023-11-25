@@ -11,21 +11,7 @@ package facade;
  */
 public interface IFacade {
 
-    public FacadeAdministradorDAO useAdministradorDAO();
-
-    public FacadeAncladaDAO useAncladaDAO();
-
     public FacadeComentarioDAO useComentarioDAO();
-
-    public FacadeComunDAO useComunDAO();
-
-    public FacadeCredencialDAO useCredencialDAO();
-
-    public FacadeEstadoDAO useEstadoDAO();
-
-    public FacadeMunicipioDAO useMunicipioDAO();
-
-    public FacadeNormalDAO useNormalDAO();
 
     public FacadePublicacionDAO usePublicacionDAO();
 
