@@ -77,15 +77,16 @@ public class SvLogin extends HttpServlet {
             throws ServletException, IOException {
         String avatar = request.getParameter("avatar");
         String contrasenia = request.getParameter("contrasenia");
-        
+
         IFabricaNegocio fabricaNegocio = new FabricaNegocio();
         Usuario usuario = fabricaNegocio.createUsuarioNegocio().
                 validarInicioUsuario(avatar, contrasenia);
-        
+
         if (usuario != null) {
             HttpSession sesion = request.getSession();
             sesion.setAttribute("usuario", usuario);
-            response.sendRedirect("/paginas/InicioPrueba.jsp");
+            response.sendRedirect(request.getContextPath() + "/paginas/InicioPrueba.jsp");
+
         }
     }
 

@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@page import="dominio.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Bienvenido</h1>
+        <%
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        %>
+        <p>Nombre: <%=usuario.getNombres()%></p>
+        <p>Avatar: <%=usuario.getAvatar()%></p>
+
     </body>
 </html>
