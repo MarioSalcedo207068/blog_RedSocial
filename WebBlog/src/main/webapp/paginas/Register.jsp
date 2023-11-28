@@ -16,89 +16,89 @@
     <body>
         <section class="container">
             <main class="form-outer">
-                <form action="#">
+                <form action="/WebBlog/SvRegister" method="POST">
                     <section class="page slidepage">
                         <div class="title">Crear Cuenta</div>
                         <div class="field">
                             <div class="label">Nombre</div>
-                            <input type="text">
+                            <input type="text" name = "nombre">
                         </div>
                         <div class="field">
                             <div class="label">Apellido Paterno</div>
-                            <input type="text">
+                            <input type="text" name = "apellidoPaterno">
                         </div>
                         <div class="field">
                             <div class="label">Apellido Materno</div>
-                            <input type="text">
+                            <input type="text" name = "apellidoMaterno">
                         </div>
                         <div class="field nextBtn">
-                            <button>Siguiente</button>
+                            <button type="button" class="prev-1 prev">Siguiente</button>
                         </div>
                     </section>
                     <section class="page">
                         <div class="title">información de Contacto</div>
                         <div class="field">
                             <div class="label">Correo Electrónico</div>
-                            <input type="email">
+                            <input type="email" name = "email">
                         </div>
                         <div class="field">
                             <div class="label">Número Telefónico</div>
-                            <input type="tel">
+                            <input type="tel" name = "telefono">
                         </div>
                         <div class="field buttons">
-                            <button class="prev-1 prev">Anterior</button>
-                            <button class="next-1 next">Siguiente</button>
+                            <button type="button" class="prev-1 prev">Anterior</button>
+                            <button type="button" class="next-1 next">Siguiente</button>
                         </div>
                     </section>
                     <section class="page">
                         <div class="field">
                             <div class="label">Estado</div>
-                            <input type="text">
+                            <input type="text" name = "estado">
                         </div>
                         <div class="field">
                             <div class="label">Ciudad</div>
-                            <input type="text">
+                            <input type="text" name = "ciudad">
                         </div>
                         <div class="field">
                             <div class="label">Municipio</div>
-                            <input type="text">
+                            <input type="text" name = "municipio">
                         </div>
                         <div class="field buttons">
-                            <button class="prev-2 prev">Anterior</button>
-                            <button class="next-2 next">Siguiente</button>
+                            <button type="button" class="prev-2 prev">Anterior</button>
+                            <button type="button" class="next-2 next">Siguiente</button>
                         </div>
                     </section>
                     <section class="page">
                         <div class="title">Fecha de Cumpleaños</div>
                         <div class="field">
                             <div class="label">Fecha Nacimiento</div>
-                            <input type="date">
+                            <input type="date" name = "fechaNacimiento">
                         </div>
                         <div class="field">
                             <div class="label">Género</div>
-                            <select>
+                            <select name = "genero">
                                 <option value="hombre">Hombre</option>
                                 <option value="mujer">Mujer</option>
                             </select>
                         </div>
                         <div class="field buttons">
-                            <button class="prev-3 prev">Anterior</button>
-                            <button class="next-3 next">Siguiente</button>
+                            <button type="button" class="prev-3 prev">Anterior</button>
+                            <button type="button" class="next-3 next">Siguiente</button>
                         </div>
                     </section>
                     <section class="page">
                         <div class="title">Credenciales</div>
                         <div class="field">
                             <div class="label">Nombre Usuario</div>
-                            <input type="text">
+                            <input type="text" name="usuario">
                         </div>
                         <div class="field">
                             <div class="label">Contraseña</div>
-                            <input type="password">
+                            <input type="password" name="contrasenia">
                         </div>
                         <div class="field buttons">
-                            <button class="prev-4 prev">Anterior</button>
-                            <button class="submit next">Registrar</button>
+                            <button type="button" class="prev-4 prev">Anterior</button>
+                            <button type="submit" class="submit next">Registrar</button>
                         </div>
                     </section>
                 </form>

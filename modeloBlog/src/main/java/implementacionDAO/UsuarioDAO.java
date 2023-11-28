@@ -37,16 +37,8 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Municipio municipio = usuario.getMunicipio();
-            if (municipio != null) {
-                municipio = em.getReference(municipio.getClass(), municipio.getId());
-                usuario.setMunicipio(municipio);
-            }
             em.persist(usuario);
-            if (municipio != null) {
-                municipio.getUsuarios().add(usuario);
-                municipio = em.merge(municipio);
-            }
+
             em.getTransaction().commit();
         } finally {
             if (em != null) {

@@ -19,13 +19,13 @@
         <main class="formulario">
             <h1>Inicio de Sesión</h1>
 
-            <form method="post">
+            <form  action="/WebBlog/SvLogin" method="POST">
                 <div class="username">
-                    <input type="text" required placeholder="Nombre de Usuario">
+                    <input type="text" required placeholder="Nombre de Usuario" name="avatar">
 
                 </div>
                 <div class="contraseña">
-                    <input type="password" required placeholder="Contraseña">
+                    <input type="password" required placeholder="Contraseña" name="contrasenia">
                 </div>
                 <input type="submit" value="Iniciar">
                 <div class="registrarse">
