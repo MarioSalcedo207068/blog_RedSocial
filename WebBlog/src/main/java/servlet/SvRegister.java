@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dominio.Anclada;
 import dominio.Comun;
 import dominio.Credencial;
 import dominio.Estado;
@@ -77,10 +78,12 @@ public class SvRegister extends HttpServlet {
 
         Normal UsuarioNormalNuevo = (Normal) fabricaNegocio.createUsuarioNegocio().registrarUsuario(usuarioNormal);
         List<Comun> publicacionesComunes = fabricaNegocio.createPublicacionNegocio().consultarPublicacionesComunes();
+        List<Anclada> publicacionesAncladas = fabricaNegocio.createPublicacionNegocio().consultarPublicacionesAncladas();
         if (UsuarioNormalNuevo != null) {
             HttpSession sesion = request.getSession();
             sesion.setAttribute("usuario", UsuarioNormalNuevo);
             sesion.setAttribute("publicacionesComunes", publicacionesComunes);
+            sesion.setAttribute("publicacionesAncladas", publicacionesAncladas);
             response.sendRedirect(request.getContextPath() + "/paginas/PaginaPrincipal.jsp");
 
         }

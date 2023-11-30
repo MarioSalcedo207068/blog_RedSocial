@@ -4,6 +4,8 @@
     Author     : HP
 --%>
 
+<%@page import="dominio.Anclada"%>
+<%@page import="dominio.Comentario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="dominio.Administrador"%>
 <%@page import="dominio.Normal"%>
@@ -110,21 +112,33 @@
                     </div>
                     <% }%>
 
-                    <%if (usuario instanceof Normal) {%>
+
+
+
                     <div class="comments">
                         <h4>Comentarios</h4>
+                        <%
+                            List<Comentario> comentarios = publicacionesComunes.get(i).getComentarios();
+                            for (int j = 0; j < comentarios.size(); j++) {%>
                         <div class="comment">
                             <img src="https://e7.pngegg.com/pngimages/348/800/png-clipart-man-wearing-blue-shirt-illustration-computer-icons-avatar-user-login-avatar-blue-child.png"
                                  alt="Avatar">
-                            <p>Daniel Alameda: No entendi</p>
+                            <%
+                                formattedDate = sdf.format(comentarios.get(j).getFechaHora().getTime());%>
+                            <h5>Fecha de creación: <%=formattedDate%></h5>
+
+                            <p><%=comentarios.get(j).getUsuarioNormal().nombreCompleto() + ": " + comentarios.get(j).getContenido()%></p>
                         </div>
-                        <form class="comment-form">
+                        <%}%>
+                        <%if (usuario instanceof Normal) {%>
+                        <form class="comment-form" >
                             <textarea placeholder="Añadir un comentario"></textarea>
                             <button type="submit">Comentar</button>
                         </form>
+                        <% }%>
                         <!-- Agrega más comentarios según sea necesario -->
                     </div>
-                    <% }%>
+
                 </div>
                 <!-- Post (feed) ends-->
             </div>
@@ -150,6 +164,11 @@
 
             </div>
 
+            <% List<Anclada> publicacionesAncladas = (List<Anclada>) request.getSession().getAttribute("publicacionesAncladas");%>
+            <%if (publicacionesAncladas != null) {%>
+
+            <%for (int i = 0; i < publicacionesAncladas.size(); i++) {%>
+
 
             <div class="post">
                 <div class="post_avatar">
@@ -161,24 +180,21 @@
                     <div class="post_header">
                         <div class="post_header_text">
                             <h3>
-                                Daniel Alameda
+                                <%=publicacionesAncladas.get(i).getAdmin().nombreCompleto()%>
                                 <span class="post_headerSpecial">
                                     <span class="material-symbols-outlined badge_verified">verified</span>
                                 </span>
                             </h3>
+                            <%SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                    String formattedDate = sdf.format(publicacionesAncladas.get(i).getFechaHoraCreacion().getTime());%>
+                            <h4>Fecha de creación: <%=formattedDate%></h4>
                         </div>
                         <div class="post_headerDescription">
-                            <p>Facebook (FB) changed its corporate name last fall to Meta, part of a strategic
-                                shift in focus from social media to a future, immersive — and so far largely
-                                theoretical — form of the internet powered by AR and VR technologies called the
-                                metaverse. Its stock started trading under the META ticker last month</p>
+                            <p><%=publicacionesAncladas.get(i).getContenido()%></p>
                         </div>
 
                     </div>
 
-                    <!--<img src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg" alt=""> -->
-                    <img src="https://cl.buscafs.com/www.levelup.com/public/uploads/images/824312/824312_832x468.jpg"
-                         alt="" />
 
                     <div class="post_footer">
                         <button class="admin_btn" onclick="borrarPublicacion(this)">Borrar Publicación</button>
@@ -186,6 +202,10 @@
 
                 </div>
             </div>
+            <% }
+            %>
+            <% }
+            %>
             <script src="../scripts/publicacion.js" type="text/javascript"></script>
     </body>
 

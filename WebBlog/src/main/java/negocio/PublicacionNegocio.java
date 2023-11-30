@@ -43,7 +43,7 @@ public class PublicacionNegocio {
     public List<Anclada> consultarPublicacionesAncladas() {
         List<Publicacion> publicaciones
                 = facade.usePublicacionDAO().findPublicacionEntities();
-        List<Anclada> publicacionesAncladas = null;
+        List<Anclada> publicacionesAncladas = new ArrayList<>();
         for (int i = 0; i < publicaciones.size(); i++) {
             if (publicaciones.get(i) instanceof Anclada) {
                 publicacionesAncladas.add((Anclada) publicaciones.get(i));

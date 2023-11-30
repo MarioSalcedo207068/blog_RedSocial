@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dominio.Anclada;
 import dominio.Comun;
 import dominio.Publicacion;
 import dominio.Usuario;
@@ -41,12 +42,13 @@ public class SvLogin extends HttpServlet {
         Usuario usuario = fabricaNegocio.createUsuarioNegocio().
                 validarInicioUsuario(avatar, contrasenia);
         List<Comun> publicacionesComunes = fabricaNegocio.createPublicacionNegocio().consultarPublicacionesComunes();
-
+        List<Anclada> publicacionesAncladas = fabricaNegocio.createPublicacionNegocio().consultarPublicacionesAncladas();
         if (usuario != null) {
 
             HttpSession sesion = request.getSession();
             sesion.setAttribute("usuario", usuario);
             sesion.setAttribute("publicacionesComunes", publicacionesComunes);
+            sesion.setAttribute("publicacionesAncladas", publicacionesAncladas);
             response.sendRedirect(request.getContextPath() + "/paginas/PaginaPrincipal.jsp");
 
         }

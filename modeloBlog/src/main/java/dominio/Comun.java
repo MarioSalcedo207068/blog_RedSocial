@@ -21,7 +21,7 @@ public class Comun extends Publicacion implements Serializable {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "publicacionComun", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "publicacionComun", cascade = CascadeType.PERSIST)
     private List<Comentario> comentarios;
 
     /**
@@ -43,6 +43,10 @@ public class Comun extends Publicacion implements Serializable {
             String contenido) {
         super(fechaHoraCreacion, titulo, contenido);
         this.usuario = usuario;
+    }
+
+    public Comun(Calendar fechaHoraCreacion, String titulo, String contenido) {
+        super(fechaHoraCreacion, titulo, contenido);
     }
 
     /**

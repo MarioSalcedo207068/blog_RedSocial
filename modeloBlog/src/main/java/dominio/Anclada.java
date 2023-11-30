@@ -6,7 +6,7 @@ package dominio;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.CascadeType;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 public class Anclada extends Publicacion implements Serializable {
 
     //Relaciones
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn(name = "administrador_id")
     private Administrador administrador;
 
