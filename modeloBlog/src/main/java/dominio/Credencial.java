@@ -20,8 +20,8 @@ public class Credencial implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "correo", nullable = false, length = 200, unique = true)
-    private String correo;
+    @Column(name = "avatar", nullable = false, length = 200, unique = true)
+    private String avatar;
 
     @Column(name = "contrasenia", nullable = false, length = 200)
     private String contrasenia;
@@ -32,46 +32,23 @@ public class Credencial implements Serializable {
     public Credencial() {
     }
 
-    /**
-     * Constructor que recibe el correo y la contraseña de las credenciales.
-     *
-     * @param correo El correo de las credenciales.
-     * @param contrasenia La contraseña de las credenciales.
-     */
-    public Credencial(String correo, String contrasenia) {
-        this.correo = correo;
+    public Credencial(String avatar, String contrasenia) {
+        this.avatar = avatar;
         this.contrasenia = contrasenia;
     }
 
-    /**
-     * Constructor que recibe el correo y la contraseña de las credenciales.
-     *
-     * @param id El id de la credencial
-     * @param correo El correo de las credenciales.
-     * @param contrasenia La contraseña de las credenciales.
-     */
-    public Credencial(Long id, String correo, String contrasenia) {
+    public Credencial(Long id, String avatar, String contrasenia) {
         this.id = id;
-        this.correo = correo;
+        this.avatar = avatar;
         this.contrasenia = contrasenia;
     }
 
-    /**
-     * Obtiene el correo de las credenciales.
-     *
-     * @return El correo de las credenciales.
-     */
-    public String getCorreo() {
-        return correo;
+    public String getAvatar() {
+        return avatar;
     }
 
-    /**
-     * Establece el correo de las credenciales.
-     *
-     * @param correo El correo de las credenciales.
-     */
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     /**

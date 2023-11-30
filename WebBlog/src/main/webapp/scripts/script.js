@@ -35,9 +35,8 @@ prevBtnFifth.addEventListener("click", function () {
     slidePage.style.marginLeft = "-75%";
 });
 submitBtn.addEventListener("click", function () {
-    var paginaLogin = "paginas/Login.jsp";
     setTimeout(function () {
         alert("Se ha registrado Exitosamente");
-        window.location.href = paginaLogin;
+
     }, 800);
 });

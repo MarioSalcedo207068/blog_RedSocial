@@ -5,6 +5,7 @@
  */
 package fabrica;
 
+import negocio.PublicacionNegocio;
 import negocio.UsuarioNegocio;
 
 /**
@@ -14,4 +15,6 @@ import negocio.UsuarioNegocio;
 public interface IFabricaNegocio {
 
     public UsuarioNegocio createUsuarioNegocio();
+
+    public PublicacionNegocio createPublicacionNegocio();
 }

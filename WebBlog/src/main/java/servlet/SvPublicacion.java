@@ -6,25 +6,22 @@
 package servlet;
 
 import dominio.Comun;
-import dominio.Publicacion;
+import dominio.Normal;
 import dominio.Usuario;
 import fabrica.FabricaNegocio;
 import fabrica.IFabricaNegocio;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import negocio.UsuarioNegocio;
 
 /**
  *
  * @author HP
  */
-public class SvLogin extends HttpServlet {
+public class SvPublicacion extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,24 +29,25 @@ public class SvLogin extends HttpServlet {
 
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String avatar = request.getParameter("avatar");
-        String contrasenia = request.getParameter("contrasenia");
+        String publicacion = request.getParameter("publicacion");
 
         IFabricaNegocio fabricaNegocio = new FabricaNegocio();
-        Usuario usuario = fabricaNegocio.createUsuarioNegocio().
-                validarInicioUsuario(avatar, contrasenia);
-        List<Comun> publicacionesComunes = fabricaNegocio.createPublicacionNegocio().consultarPublicacionesComunes();
+        Comun publicacionComun = new Comun();
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-        if (usuario != null) {
+        publicacionComun.setContenido(publicacion);
+        publicacionComun.setFechaHoraCreacion(Calendar.getInstance());
+        publicacionComun.setTitulo("publicacion");
+        publicacionComun.setUsuario(usuario);
+        fabricaNegocio.createPublicacionNegocio().registrarPublicacion(publicacionComun);
 
-            HttpSession sesion = request.getSession();
-            sesion.setAttribute("usuario", usuario);
-            sesion.setAttribute("publicacionesComunes", publicacionesComunes);
-            response.sendRedirect(request.getContextPath() + "/paginas/PaginaPrincipal.jsp");
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("Publicación enviada con éxito");
 
-        }
     }
 
 }

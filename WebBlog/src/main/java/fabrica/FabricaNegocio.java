@@ -7,6 +7,7 @@ package fabrica;
 
 import facade.Facade;
 import facade.IFacade;
+import negocio.PublicacionNegocio;
 import negocio.UsuarioNegocio;
 
 /**
@@ -24,6 +25,11 @@ public class FabricaNegocio implements IFabricaNegocio {
     @Override
     public UsuarioNegocio createUsuarioNegocio() {
         return new UsuarioNegocio(facade);
+    }
+
+    @Override
+    public PublicacionNegocio createPublicacionNegocio() {
+        return new PublicacionNegocio(facade);
     }
 
 }

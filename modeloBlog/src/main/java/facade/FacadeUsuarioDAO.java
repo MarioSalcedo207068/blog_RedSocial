@@ -24,8 +24,8 @@ public class FacadeUsuarioDAO {
         this.usuarioDAO = usuarioDAO;
     }
 
-    public void create(Usuario usuario) {
-        usuarioDAO.create(usuario);
+    public Usuario create(Usuario usuario) {
+        return usuarioDAO.create(usuario);
     }
 
     public void edit(Usuario usuario) {

@@ -32,14 +32,15 @@ public class UsuarioDAO implements Serializable, IUsuarioDAO {
         return emf.createEntityManager();
     }
 
-    public void create(Usuario usuario) {
+    public Usuario create(Usuario usuario) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(usuario);
-
             em.getTransaction().commit();
+            em.refresh(usuario);
+            return usuario;
         } finally {
             if (em != null) {
                 em.close();

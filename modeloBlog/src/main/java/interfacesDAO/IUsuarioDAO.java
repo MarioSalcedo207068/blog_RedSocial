@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IUsuarioDAO {
 
-    public void create(Usuario usuario);
+    public Usuario create(Usuario usuario);
 
     public void edit(Usuario usuario) throws NonexistentEntityException, Exception;
 

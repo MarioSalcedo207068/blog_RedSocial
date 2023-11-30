@@ -22,15 +22,15 @@ public class UsuarioNegocio {
         this.facade = facade;
     }
 
-    public void registrarUsuario(Usuario usuario) {
-        this.facade.useUsuarioDAO().create(usuario);
+    public Usuario registrarUsuario(Usuario usuario) {
+        return this.facade.useUsuarioDAO().create(usuario);
     }
 
     public Usuario validarInicioUsuario(String avatar, String contrasenia) {
         List<Usuario> usuarios = facade.useUsuarioDAO().findUsuarioEntities();
 
         for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getAvatar().equals(avatar)
+            if (usuarios.get(i).getCredencial().getAvatar().equals(avatar)
                     && usuarios.get(i).getCredencial().getContrasenia().equals(contrasenia)) {
                 return usuarios.get(i);
             }

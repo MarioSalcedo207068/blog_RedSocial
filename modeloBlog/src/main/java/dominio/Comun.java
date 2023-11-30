@@ -18,8 +18,8 @@ public class Comun extends Publicacion implements Serializable {
 
     //Relaciones
     @ManyToOne()
-    @JoinColumn(name = "usuarioNormal_id")
-    private Normal usuarioNormal;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "publicacionComun", cascade = CascadeType.REMOVE)
     private List<Comentario> comentarios;
@@ -33,16 +33,16 @@ public class Comun extends Publicacion implements Serializable {
     /**
      * Constructor que recibe el usuario asociado a la publicación común.
      *
-     * @param Normal El usuario asociado a la publicación común.
+     * @param usuario El usuario asociado a la publicación común.
      */
-    public Comun(Normal Normal) {
-        this.usuarioNormal = Normal;
+    public Comun(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Comun(Normal normal, Calendar fechaHoraCreacion, String titulo,
+    public Comun(Usuario usuario, Calendar fechaHoraCreacion, String titulo,
             String contenido) {
         super(fechaHoraCreacion, titulo, contenido);
-        this.usuarioNormal = normal;
+        this.usuario = usuario;
     }
 
     /**
@@ -58,10 +58,10 @@ public class Comun extends Publicacion implements Serializable {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * común.
      */
-    public Comun(Normal normal, Calendar fechaHoraCreacion, String titulo,
+    public Comun(Usuario usuario, Calendar fechaHoraCreacion, String titulo,
             String contenido, Calendar fechaHoraEdicion) {
         super(fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
-        this.usuarioNormal = normal;
+        this.usuario = usuario;
     }
 
     /**
@@ -78,10 +78,10 @@ public class Comun extends Publicacion implements Serializable {
      * @param fechaHoraEdicion La fecha y hora de edición de la publicación
      * común.
      */
-    public Comun(Normal normal, Long id, Calendar fechaHoraCreacion, String titulo,
+    public Comun(Usuario usuario, Long id, Calendar fechaHoraCreacion, String titulo,
             String contenido, Calendar fechaHoraEdicion) {
         super(id, fechaHoraCreacion, titulo, contenido, fechaHoraEdicion);
-        this.usuarioNormal = normal;
+        this.usuario = usuario;
     }
 
     /**
@@ -89,8 +89,8 @@ public class Comun extends Publicacion implements Serializable {
      *
      * @return El usuario asociado a la publicación común.
      */
-    public Normal getUsuarioNormal() {
-        return usuarioNormal;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     /**
@@ -98,8 +98,8 @@ public class Comun extends Publicacion implements Serializable {
      *
      * @param normal El usuario asociado a la publicación común.
      */
-    public void setUsuarioNormal(Normal normal) {
-        this.usuarioNormal = normal;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     /**
@@ -119,11 +119,6 @@ public class Comun extends Publicacion implements Serializable {
      */
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
-    }
-
-    @Override
-    public String toString() {
-        return "Comun{" + "usuario=" + usuarioNormal + ", comentarios=" + comentarios + '}';
     }
 
 }

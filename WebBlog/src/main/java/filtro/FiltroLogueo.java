@@ -31,7 +31,7 @@ public class FiltroLogueo implements Filter {
     @Override
     public void destroy() {
     }
-    private final static String[] pathsPublicos = {"paginas/Login.jsp",
+    private final static String[] pathsPublicos = {
         "paginas/Register.jsp", "estilos", "scripts", "SvRegister", "SvLogin"};
 
     @Override

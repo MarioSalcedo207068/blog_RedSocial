@@ -32,8 +32,8 @@ public class Usuario implements Serializable {
     @Column(name = "telefono", nullable = false, length = 12)
     private String telefono;
 
-    @Column(name = "avatar", nullable = false, length = 200, unique = true)
-    private String avatar;
+    @Column(name = "correo", nullable = false, length = 200, unique = true)
+    private String correo;
 
     @Column(name = "ciudad", nullable = false, length = 200)
     private String ciudad;
@@ -57,6 +57,10 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "municipio_id")
     private Municipio municipio;
 
+    //Relación con usuario
+    @OneToMany(mappedBy = "usuario")
+    private List<Comun> publicacionesComunes;
+
     /**
      * Constructor por defecto de la clase Usuario.
      */
@@ -68,28 +72,12 @@ public class Usuario implements Serializable {
         this.credencial = credencial;
     }
 
-    /**
-     * Constructor de la clase Usuario.
-     *
-     * @param nombres Los nombres del usuario.
-     * @param apellidoPaterno El apellido paterno del usuario.
-     * @param apellidoMaterno El apellido materno del usuario.
-     * @param telefono El número de teléfono del usuario.
-     * @param avatar La URL del avatar del usuario.
-     * @param ciudad La ciudad del usuario.
-     * @param fechaNacimiento La fecha de nacimiento del usuario.
-     * @param genero El género del usuario.
-     * @param credencial Las credenciales del usuario.
-     * @param municipio El municipio del usuario.
-     */
-    public Usuario(String nombres, String apellidoPaterno, String apellidoMaterno,
-            String telefono, String avatar, String ciudad, Calendar fechaNacimiento,
-            Genero genero, Credencial credencial, Municipio municipio) {
+    public Usuario(String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, String ciudad, Calendar fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.telefono = telefono;
-        this.avatar = avatar;
+        this.correo = correo;
         this.ciudad = ciudad;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
@@ -97,31 +85,13 @@ public class Usuario implements Serializable {
         this.municipio = municipio;
     }
 
-    /**
-     * Constructor de la clase Usuario.
-     *
-     * @param id El ID del usuario.
-     * @param nombres Los nombres del usuario.
-     * @param apellidoPaterno El apellido paterno del usuario.
-     * @param apellidoMaterno El apellido materno del usuario.
-     * @param telefono El número de teléfono del usuario.
-     * @param avatar La URL del avatar del usuario.
-     * @param ciudad La ciudad del usuario.
-     * @param fechaNacimiento La fecha de nacimiento del usuario.
-     * @param genero El género del usuario.
-     * @param credencial Las credenciales del usuario.
-     * @param municipio El municipio del usuario.
-     */
-    public Usuario(Long id, String nombres, String apellidoPaterno,
-            String apellidoMaterno, String telefono, String avatar,
-            String ciudad, Calendar fechaNacimiento, Genero genero,
-            Credencial credencial, Municipio municipio) {
+    public Usuario(Long id, String nombres, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, String ciudad, Calendar fechaNacimiento, Genero genero, Credencial credencial, Municipio municipio) {
         this.id = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.telefono = telefono;
-        this.avatar = avatar;
+        this.correo = correo;
         this.ciudad = ciudad;
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
@@ -220,24 +190,6 @@ public class Usuario implements Serializable {
     }
 
     /**
-     * Obtiene la URL del avatar del usuario.
-     *
-     * @return La URL del avatar del usuario.
-     */
-    public String getAvatar() {
-        return avatar;
-    }
-
-    /**
-     * Establece la URL del avatar del usuario.
-     *
-     * @param avatar La URL del avatar del usuario.
-     */
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    /**
      * Obtiene la ciudad del usuario.
      *
      * @return La ciudad del usuario.
@@ -327,11 +279,23 @@ public class Usuario implements Serializable {
         this.municipio = municipio;
     }
 
+    public String nombreCompleto() {
+        return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 79 * hash + Objects.hashCode(this.id);
         return hash;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     @Override
@@ -351,7 +315,5 @@ public class Usuario implements Serializable {
         }
         return true;
     }
-
-
 
 }
