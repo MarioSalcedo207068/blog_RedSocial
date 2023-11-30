@@ -47,7 +47,7 @@
                 </div>
                 <div class="sidebarOption">
                     <span class="material-symbols-outlined">person</span>
-                    <a href="redSocial_profile.html">
+                    <a href="Perfil.jsp">
                         <h2>Perfil</h2>
                     </a>
                 </div>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="AppPosts">
-                <form id="formularioPublicacion">
+                <form id="formularioPubFlicacion">
                     <div class="postbox_input">
                         <img src="https://e7.pngegg.com/pngimages/348/800/png-clipart-man-wearing-blue-shirt-illustration-computer-icons-avatar-user-login-avatar-blue-child.png"
                              alt="notFound" />
@@ -110,7 +110,7 @@
                     </div>
                     <% }%>
 
-
+                    <%if (usuario instanceof Normal) {%>
                     <div class="comments">
                         <h4>Comentarios</h4>
                         <div class="comment">
@@ -124,6 +124,7 @@
                         </form>
                         <!-- Agrega más comentarios según sea necesario -->
                     </div>
+                    <% }%>
                 </div>
                 <!-- Post (feed) ends-->
             </div>

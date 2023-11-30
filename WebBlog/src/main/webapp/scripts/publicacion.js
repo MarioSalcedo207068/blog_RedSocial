@@ -41,3 +41,5 @@ function enviarPublicacion() {
     };
     xhttp.send("publicacion=" + encodeURIComponent(publicacion));
 }
+
+
