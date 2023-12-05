@@ -18,38 +18,57 @@
             <main class="form-outer">
                 <form action="/WebBlog/SvRegister" method="POST">
                     <section class="page slidepage">
-                        <div class="title">Crear Cuenta</div>
-                        <div class="field">
-                            <div class="label">Nombre</div>
-                            <input type="text" name = "nombre">
-                        </div>
-                        <div class="field">
-                            <div class="label">Apellido Paterno</div>
-                            <input type="text" name = "apellidoPaterno">
-                        </div>
-                        <div class="field">
-                            <div class="label">Apellido Materno</div>
-                            <input type="text" name = "apellidoMaterno">
-                        </div>
-                        <div class="field nextBtn">
-                            <button type="button" class="prev-1 prev">Siguiente</button>
-                        </div>
-                    </section>
-                    <section class="page">
-                        <div class="title">información de Contacto</div>
-                        <div class="field">
-                            <div class="label">Correo Electrónico</div>
-                            <input type="email" name = "email">
-                        </div>
-                        <div class="field">
-                            <div class="label">Número Telefónico</div>
-                            <input type="tel" name = "telefono">
-                        </div>
-                        <div class="field buttons">
-                            <button type="button" class="prev-1 prev">Anterior</button>
-                            <button type="button" class="next-1 next">Siguiente</button>
-                        </div>
-                    </section>
+                    <div class="title">Crear Cuenta</div>
+                    <div class="field">
+                        <div class="label">Nombre</div>
+                        <input type="text" id = "nombre" name = "nombre" pattern="[A-Za-z]+">
+                    </div>
+                    <div class="field">
+                        <div class="label">Apellido Paterno</div>
+                        <input type="text" id = "apellidoP" name = "apellidoPaterno" pattern="[A-Za-z]+">
+                    </div>
+                    <div class="field">
+                        <div class="label">Apellido Materno</div>
+                        <input type="text" id = "apellidoM" name = "apellidoMaterno" pattern="[A-Za-z]+">
+                    </div>
+                    <div class="field nextBtn">
+                        <button type="button" class="next-1 next" onclick="validarNombre()">Siguiente</button>
+                    </div>
+                </section>
+                <section class="page">
+                    <div class="title">información de Contacto</div>
+                    <div class="field">
+                        <div class="label">Correo Electrónico</div>
+                        <input type="email" id="email" name = "email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                               accept=""title="Ingresa un correo electrónico válido" required>
+                    </div>
+                    <div class="field">
+                        <div class="label">Número Telefónico</div>
+                        <input type="telefono" id = "telefono" name = "telefono" pattern="\d{10}" title="Ingresa un número telefónico válido de 10 dígitos">
+                    </div>
+                    <div class="field buttons">
+                        <button type="button" class="prev-1 prev">Anterior</button>
+                        <button type="button" class="next-2 next" onclick="validarTelefono()">Siguiente</button>
+                    </div>
+                </section>
+                <section class="page">
+                    <div class="field">
+                        <div class="label">Estado</div>
+                        <input type="text" name = "estado" id = "estado">
+                    </div>
+                    <div class="field">
+                        <div class="label">Ciudad</div>
+                        <input type="text" name = "ciudad" id="ciudad">
+                    </div>
+                    <div class="field">
+                        <div class="label">Municipio</div>
+                        <input type="text" name = "municipio" id="municipio">
+                    </div>
+                    <div class="field buttons">
+                        <button type="button" class="prev-2 prev">Anterior</button>
+                        <button type="button" class="next-3 next" onclick="validarLocalidad()">Siguiente</button>
+                    </div>
+                </section>
                     <section class="page">
                         <div class="field">
                             <div class="label">Estado</div>
