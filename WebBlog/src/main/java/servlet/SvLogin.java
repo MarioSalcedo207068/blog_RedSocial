@@ -51,6 +51,9 @@ public class SvLogin extends HttpServlet {
             sesion.setAttribute("publicacionesAncladas", publicacionesAncladas);
             response.sendRedirect(request.getContextPath() + "/paginas/PaginaPrincipal.jsp");
 
+        }else{
+            response.sendRedirect("errores.jsp");
+            String msg="Favor de ingresar un usuario válido";
         }
     }
 
